@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outcomes — Diagrams for Han HELOIR YAN</title>
+<style>/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek-ext */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+</style>
+
+<style>
+  :root {
+    --font-serif-display: 'Fraunces','GT Super Display','Source Serif 4',Georgia,serif;
+    --font-serif-body: 'Source Serif 4','Source Serif Pro',Charter,Georgia,serif;
+    --font-sans: 'Inter','Söhne',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-mono: 'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+
+    --ink-0:#ffffff;
+    --ink-25:#fafafa;
+    --ink-50:#f2f2f2;
+    --ink-75:#ececec;
+    --ink-100:#e6e6e6;
+    --ink-200:#c9c9c9;
+    --ink-300:#a8a8a8;
+    --ink-400:#6b6b6b;
+    --ink-500:#545454;
+    --ink-700:#292929;
+    --ink-900:#191919;
+    --ink-1000:#000000;
+
+    --espresso-900:#2b1d13;
+    --espresso-700:#4a2f1e;
+    --espresso-500:#7a4a2e;
+    --latte-400:#c89968;
+    --cream-200:#efe4d4;
+    --cream-100:#f7efe2;
+    --cream-50:#fbf7ef;
+
+    --green-600:#1a8917;
+    --green-700:#156d12;
+    --green-100:#ddf2dd;
+    --highlight:#f4e9c1;
+    --rust:#9c4a2a;
+    --rust-soft:#f6e7df;
+
+    --measure: 760px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { background: var(--ink-0); color: var(--ink-700); -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.5;
+    padding: 48px 0 64px;
+    background: #ece9e2;
+  }
+
+  /* ---------- shared figure shell — each fig is a screenshot-ready card ---------- */
+  .fig {
+    max-width: var(--measure);
+    margin: 0 auto 40px;
+    padding: 44px 44px 36px;
+    background: var(--ink-0);
+    border: 1px solid var(--ink-100);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.05);
+    border-radius: 4px;
+  }
+  .fig:last-child { margin-bottom: 0; }
+
+  .fig-eyebrow {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 18px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+  }
+  .fig-eyebrow .num {
+    color: var(--ink-900);
+    font-weight: 600;
+  }
+  .fig-eyebrow .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--ink-100);
+    transform: translateY(-3px);
+  }
+  .fig-eyebrow .kicker {
+    font-family: var(--font-sans);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: var(--ink-400);
+  }
+
+  .fig-title {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.08;
+    letter-spacing: -0.022em;
+    color: var(--ink-900);
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+  .fig-dek {
+    font-family: var(--font-serif-body);
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--ink-500);
+    margin-bottom: 36px;
+    text-wrap: pretty;
+    max-width: 640px;
+  }
+
+  .fig-caption {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--ink-100);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-400);
+  }
+  .fig-caption strong {
+    font-weight: 500;
+    color: var(--ink-700);
+  }
+  .fig-caption .byline {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-300);
+    white-space: nowrap;
+  }
+
+  .dotsep {
+    text-align: center;
+    color: var(--ink-300);
+    letter-spacing: 14px;
+    font-size: 16px;
+    margin: 28px 0;
+    user-select: none;
+  }
+
+  /* ===================================================================== */
+  /* DIAGRAM 1 — The loop                                                  */
+  /* ===================================================================== */
+
+  .loop {
+    position: relative;
+    background: var(--cream-50);
+    border: 1px solid var(--cream-200);
+    border-radius: 4px;
+    padding: 40px 32px 32px;
+  }
+
+  .loop-stage-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+    position: relative;
+  }
+  .loop-card {
+    background: var(--ink-0);
+    border: 1px solid var(--ink-100);
+    border-radius: 3px;
+    padding: 22px 20px 20px;
+    position: relative;
+    transition: transform .2s var(--ease, cubic-bezier(.16,1,.3,1));
+  }
+  .loop-card .stagenum {
+    font-family: var(--font-serif-display);
+    font-weight: 600;
+    font-style: italic;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--ink-200);
+    margin-bottom: 14px;
+  }
+  .loop-card.is-grader .stagenum { color: var(--latte-400); }
+  .loop-card .role {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    margin-bottom: 6px;
+  }
+  .loop-card h4 {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink-900);
+    letter-spacing: -0.012em;
+    margin-bottom: 8px;
+  }
+  .loop-card p {
+    font-family: var(--font-serif-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-500);
+  }
+  .loop-card.is-grader {
+    background: var(--ink-900);
+    border-color: var(--ink-900);
+  }
+  .loop-card.is-grader .role { color: var(--latte-400); }
+  .loop-card.is-grader h4 { color: var(--ink-0); }
+  .loop-card.is-grader p { color: var(--ink-200); }
+  .loop-card.is-grader .stagenum-ribbon {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background: var(--latte-400);
+    color: var(--ink-900);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 10px 4px 8px;
+  }
+
+  .loop-states {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--cream-200);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  .loop-states-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    line-height: 1.4;
+  }
+  .loop-states-label strong {
+    display: block;
+    color: var(--ink-900);
+    font-weight: 600;
+  }
+  .loop-states-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .pill {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 11px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--ink-100);
+    color: var(--ink-500);
+    background: var(--ink-0);
+  }
+  .pill.is-good { background: var(--green-100); border-color: #b9e1b6; color: var(--green-700); }
+  .pill.is-revise { background: var(--cream-200); border-color: var(--latte-400); color: var(--espresso-700); }
+  .pill::before {
+    content: "";
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    margin-right: 7px;
+    transform: translateY(-1px);
+    opacity: .8;
+  }
+
+  .loop-feedback {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-sans);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--rust);
+  }
+  .loop-feedback svg { flex-shrink: 0; }
+  .loop-feedback-line {
+    flex: 1;
+    height: 1px;
+    background: repeating-linear-gradient(to right, var(--rust) 0 4px, transparent 4px 8px);
+  }
+
+  /* ===================================================================== */
+  /* DIAGRAM 2 — Lifecycle as events                                       */
+  /* ===================================================================== */
+
+  .events {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0;
+    border-top: 1px solid var(--ink-100);
+  }
+  .ev-row {
+    display: contents;
+  }
+  .ev-time, .ev-body {
+    border-bottom: 1px solid var(--ink-100);
+    padding: 22px 0;
+  }
+  .ev-time {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-400);
+    text-transform: uppercase;
+    padding-right: 24px;
+    position: relative;
+  }
+  .ev-time::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 28px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--ink-0);
+    border: 2px solid var(--ink-300);
+    transform: translateX(50%);
+  }
+  .ev-row.is-start .ev-time::after { border-color: var(--green-600); background: var(--green-100); }
+  .ev-row.is-running .ev-time::after { border-color: var(--latte-400); background: var(--cream-100); }
+  .ev-row.is-decide .ev-time::after { border-color: var(--ink-900); background: var(--ink-900); }
+  .ev-row.is-fire .ev-time::after { border-color: var(--rust); background: var(--rust); }
+
+  .ev-body {
+    padding-left: 32px;
+    border-left: 1px solid var(--ink-100);
+    margin-left: -1px;
+  }
+  .ev-name {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-900);
+    margin-bottom: 4px;
+    word-break: break-word;
+  }
+  .ev-desc {
+    font-family: var(--font-serif-body);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-500);
+  }
+  .ev-tag {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-400);
+    margin-left: 8px;
+    padding: 2px 8px;
+    border: 1px solid var(--ink-100);
+    border-radius: 999px;
+    transform: translateY(-2px);
+  }
+  .ev-terminals {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .ev-foot {
+    margin-top: 24px;
+    background: var(--cream-100);
+    border: 1px solid var(--cream-200);
+    padding: 16px 18px;
+    border-radius: 3px;
+    font-family: var(--font-serif-body);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--espresso-700);
+    line-height: 1.55;
+  }
+  .ev-foot code {
+    font-family: var(--font-mono);
+    font-style: normal;
+    background: var(--ink-0);
+    padding: 1px 6px;
+    border: 1px solid var(--cream-200);
+    border-radius: 2px;
+    font-size: 12px;
+    color: var(--espresso-900);
+  }
+
+  /* ===================================================================== */
+  /* DIAGRAM 3 — Then vs now                                               */
+  /* ===================================================================== */
+
+  .twocol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 2px solid var(--ink-900);
+    border-bottom: 2px solid var(--ink-900);
+  }
+  .twocol > .col {
+    padding: 28px 24px 28px 0;
+    border-right: 1px solid var(--ink-100);
+  }
+  .twocol > .col + .col {
+    padding: 28px 0 28px 24px;
+    border-right: none;
+  }
+  .col-year {
+    font-family: var(--font-serif-display);
+    font-weight: 600;
+    font-style: italic;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--ink-900);
+    letter-spacing: -0.025em;
+    margin-bottom: 4px;
+  }
+  .twocol .col + .col .col-year { color: var(--rust); }
+  .col-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    margin-bottom: 18px;
+  }
+  .col-h {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink-900);
+    letter-spacing: -0.012em;
+    margin-bottom: 16px;
+  }
+  pre.snippet {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--ink-700);
+    background: var(--ink-25);
+    border-left: 2px solid var(--ink-200);
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  pre.snippet.is-new {
+    background: var(--cream-50);
+    border-left-color: var(--latte-400);
+  }
+  pre.snippet .c { color: var(--ink-300); font-style: italic; }
+  pre.snippet .k { color: var(--rust); }
+  pre.snippet .s { color: var(--espresso-700); }
+  .col-foot {
+    font-family: var(--font-serif-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-500);
+  }
+  .col-foot strong {
+    color: var(--ink-900);
+    font-weight: 600;
+  }
+
+  /* ===================================================================== */
+  /* DIAGRAM 4 — Three places                                              */
+  /* ===================================================================== */
+
+  .spectrum-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    margin-bottom: 28px;
+    height: 12px;
+  }
+  .spectrum-bar > div {
+    border-radius: 999px;
+  }
+  .spectrum-bar > div:nth-child(1) { background: var(--ink-900); }
+  .spectrum-bar > div:nth-child(2) {
+    background: linear-gradient(to right, var(--ink-900), var(--latte-400));
+  }
+  .spectrum-bar > div:nth-child(3) {
+    background: var(--latte-400);
+    opacity: .55;
+  }
+  .spectrum-bar-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    margin: -20px 0 32px;
+  }
+  .spectrum {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .sp-card {
+    border: 1px solid var(--ink-100);
+    background: var(--ink-0);
+    padding: 22px 18px 18px;
+    display: flex;
+    flex-direction: column;
+  }
+  .sp-card.is-managed {
+    background: var(--cream-50);
+    border-color: var(--cream-200);
+  }
+  .sp-num {
+    font-family: var(--font-serif-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 28px;
+    color: var(--ink-300);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .sp-card.is-managed .sp-num { color: var(--latte-400); }
+  .sp-h {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--ink-900);
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .sp-sub {
+    font-family: var(--font-serif-body);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-500);
+    margin-bottom: 14px;
+    line-height: 1.45;
+  }
+  .sp-rows { margin: 0 0 16px 0; padding: 0; list-style: none; }
+  .sp-rows li {
+    padding: 9px 0;
+    border-top: 1px solid var(--ink-50);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-700);
+  }
+  .sp-rows li:first-child { border-top: none; padding-top: 0; }
+  .sp-rows .rk {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    margin-bottom: 2px;
+  }
+  .sp-foot {
+    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 9px 8px;
+    border: 1px solid var(--ink-100);
+    border-radius: 999px;
+    color: var(--ink-500);
+    background: var(--ink-25);
+  }
+  .sp-card.is-managed .sp-foot {
+    background: var(--ink-900);
+    color: var(--cream-100);
+    border-color: var(--ink-900);
+  }
+
+  /* ===================================================================== */
+  /* DIAGRAM 5 — Three primitives                                          */
+  /* ===================================================================== */
+
+  .arch {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    position: relative;
+  }
+  .arch-bus {
+    grid-column: 1 / -1;
+    background: var(--ink-900);
+    color: var(--ink-0);
+    padding: 18px 24px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .arch-bus-title {
+    font-family: var(--font-serif-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.005em;
+  }
+  .arch-bus-title small {
+    display: block;
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 10px;
+    color: var(--latte-400);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .arch-bus-api {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+  .arch-bus-api code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    padding: 4px 8px;
+    border-radius: 3px;
+    color: var(--cream-100);
+  }
+
+  .arch-card {
+    border: 1px solid var(--ink-100);
+    background: var(--ink-0);
+    padding: 22px 20px 20px;
+    text-align: center;
+    position: relative;
+  }
+  .arch-card .ico {
+    width: 56px; height: 56px;
+    margin: 4px auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--cream-100);
+  }
+  .arch-card.is-session .ico { background: var(--ink-50); }
+  .arch-card.is-hands .ico { background: var(--green-100); }
+  .arch-card .role-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    margin-bottom: 4px;
+  }
+  .arch-card h5 {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--ink-900);
+    letter-spacing: -0.014em;
+    margin-bottom: 8px;
+  }
+  .arch-card p {
+    font-family: var(--font-serif-body);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink-500);
+    margin-bottom: 14px;
+  }
+  .arch-card .api {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+  }
+  .arch-card .api code {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    background: var(--ink-25);
+    border: 1px solid var(--ink-100);
+    padding: 3px 7px;
+    border-radius: 3px;
+    color: var(--ink-700);
+  }
+
+  .perf-stat {
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: baseline;
+    border-top: 1px solid var(--ink-100);
+    padding-top: 22px;
+  }
+  .perf-stat-block .num {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--ink-900);
+  }
+  .perf-stat-block .num .pct {
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 500;
+    color: var(--ink-400);
+    margin-left: 4px;
+  }
+  .perf-stat-block .lbl {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-500);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .perf-stat-block .lbl strong {
+    display: block;
+    color: var(--ink-900);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  /* ===================================================================== */
+  /* DIAGRAM 6 — Twin brain                                                */
+  /* ===================================================================== */
+
+  .twin-wrap {
+    background: var(--ink-25);
+    border: 1px solid var(--ink-100);
+    padding: 28px 24px 24px;
+  }
+  .twin-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  .twin-card {
+    background: var(--ink-0);
+    border: 1px solid var(--ink-100);
+    padding: 20px;
+    position: relative;
+  }
+  .twin-card.is-grader {
+    border-color: var(--ink-900);
+    background: var(--ink-900);
+  }
+  .twin-card.is-grader .twin-h,
+  .twin-card.is-grader .twin-role { color: var(--ink-0); }
+  .twin-card.is-grader .twin-p { color: var(--ink-200); }
+  .twin-card.is-grader code {
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.1);
+    color: var(--cream-100);
+  }
+  .twin-role {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    margin-bottom: 6px;
+  }
+  .twin-h {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink-900);
+    letter-spacing: -0.014em;
+    margin-bottom: 8px;
+  }
+  .twin-p {
+    font-family: var(--font-serif-body);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink-500);
+    margin-bottom: 12px;
+  }
+  .twin-card .api code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: var(--ink-25);
+    border: 1px solid var(--ink-100);
+    padding: 3px 7px;
+    border-radius: 3px;
+    margin-right: 4px;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+  .twin-card.is-grader .grader-tag {
+    position: absolute;
+    top: -1px; right: -1px;
+    background: var(--latte-400);
+    color: var(--ink-900);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 5px 9px;
+  }
+
+  .twin-bus {
+    background: var(--ink-0);
+    border: 1px solid var(--ink-100);
+    padding: 16px 18px;
+  }
+  .twin-bus-h {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .twin-bus-h .lbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+  }
+  .twin-bus-h .sid {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-900);
+    font-weight: 500;
+  }
+  .twin-bus-events {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-700);
+  }
+  .twin-bus-events span.arrow {
+    color: var(--ink-300);
+    font-size: 10px;
+  }
+  .twin-bus-events span.term {
+    background: var(--green-100);
+    color: var(--green-700);
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+
+  /* ===================================================================== */
+  /* DIAGRAM 7 — Layers as SKUs                                            */
+  /* ===================================================================== */
+
+  table.layers {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid var(--ink-900);
+    border-bottom: 2px solid var(--ink-900);
+  }
+  table.layers thead th {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    text-align: left;
+    padding: 14px 16px 14px 0;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  table.layers tbody td {
+    padding: 22px 16px 22px 0;
+    border-bottom: 1px solid var(--ink-100);
+    vertical-align: top;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink-700);
+  }
+  table.layers tbody tr:last-child td { border-bottom: none; }
+  table.layers .col-name {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--ink-900);
+    letter-spacing: -0.012em;
+    width: 28%;
+  }
+  table.layers .col-was code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-500);
+    background: var(--ink-25);
+    padding: 3px 7px;
+    border-radius: 3px;
+    border: 1px solid var(--ink-100);
+  }
+  table.layers .col-sku {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: -0.005em;
+  }
+  .sku-1 { color: var(--rust); }
+  .sku-2 { color: var(--espresso-700); }
+  .sku-3 { color: var(--green-700); }
+  .sku-4 { color: var(--latte-400); }
+  table.layers .col-status .badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--ink-100);
+    background: var(--ink-25);
+    color: var(--ink-500);
+    padding: 4px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  table.layers .col-status .badge.is-preview {
+    background: var(--cream-100);
+    border-color: var(--cream-200);
+    color: var(--espresso-700);
+  }
+
+  /* ===================================================================== */
+  /* DIAGRAM 8 — Code → Products                                           */
+  /* ===================================================================== */
+
+  .h-grid {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+  .h-side {
+    border: 1px solid var(--ink-100);
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+  }
+  .h-side.is-after {
+    background: var(--ink-900);
+    border-color: var(--ink-900);
+  }
+  .h-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    margin-bottom: 6px;
+  }
+  .h-side.is-after .h-tag { color: var(--latte-400); }
+  .h-h {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink-900);
+    letter-spacing: -0.012em;
+    margin-bottom: 18px;
+  }
+  .h-side.is-after .h-h { color: var(--ink-0); }
+  .h-list { list-style: none; padding: 0; margin: 0 0 16px 0; }
+  .h-list li {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-700);
+    padding: 11px 0;
+    border-top: 1px solid var(--ink-50);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .h-list li:first-child { border-top: none; }
+  .h-side.is-after .h-list li {
+    color: var(--ink-0);
+    border-top-color: rgba(255,255,255,.08);
+    font-family: var(--font-serif-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: -0.006em;
+  }
+  .h-marker {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--ink-300);
+    flex-shrink: 0;
+  }
+  .h-side.is-after .h-marker {
+    width: 8px; height: 8px;
+    background: var(--latte-400);
+  }
+  .h-foot {
+    font-family: var(--font-serif-body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-500);
+    border-top: 1px dashed var(--ink-100);
+    padding-top: 14px;
+    margin-top: auto;
+  }
+  .h-side.is-after .h-foot {
+    color: var(--ink-200);
+    border-top-color: rgba(255,255,255,.1);
+  }
+  .h-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-300);
+  }
+
+  /* ===================================================================== */
+  /* DIAGRAM 9 — Adoption ladder                                           */
+  /* ===================================================================== */
+
+  .ladder { display: flex; flex-direction: column; gap: 0; }
+  .ladder-step {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 24px;
+    align-items: start;
+    padding: 28px 0;
+    border-top: 1px solid var(--ink-100);
+  }
+  .ladder-step:first-child { border-top: none; padding-top: 0; }
+  .ladder-step:last-child { padding-bottom: 0; }
+  .ladder-rank {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 80px;
+    line-height: 0.85;
+    color: var(--ink-900);
+    letter-spacing: -0.04em;
+  }
+  .ladder-step.is-1 .ladder-rank { color: var(--rust); }
+  .ladder-step.is-2 .ladder-rank { color: var(--espresso-700); }
+  .ladder-step.is-3 .ladder-rank { color: var(--ink-300); }
+
+  .ladder-h {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--ink-900);
+    letter-spacing: -0.014em;
+    margin-bottom: 6px;
+  }
+  .ladder-sub {
+    font-family: var(--font-serif-body);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-500);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .ladder-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--ink-100);
+  }
+  .ladder-meta dt {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    margin-bottom: 4px;
+  }
+  .ladder-meta dd {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-700);
+    line-height: 1.4;
+  }
+
+  /* ===================================================================== */
+  /* DIAGRAM 10 — Ownership                                                */
+  /* ===================================================================== */
+
+  .own {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 2px solid var(--ink-900);
+    border-bottom: 2px solid var(--ink-900);
+  }
+  .own-side { padding: 28px 24px; }
+  .own-side.is-yours {
+    background: var(--cream-50);
+    border-right: 1px solid var(--ink-100);
+  }
+  .own-side.is-anthropic {
+    background: var(--ink-900);
+    color: var(--cream-100);
+  }
+  .own-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    margin-bottom: 6px;
+  }
+  .own-side.is-anthropic .own-tag { color: var(--latte-400); }
+  .own-h {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--ink-900);
+    letter-spacing: -0.018em;
+    margin-bottom: 4px;
+  }
+  .own-h em {
+    font-style: italic;
+    color: var(--rust);
+  }
+  .own-side.is-anthropic .own-h { color: var(--ink-0); }
+  .own-side.is-anthropic .own-h em { color: var(--latte-400); }
+  .own-kicker {
+    font-family: var(--font-serif-body);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-500);
+    margin-bottom: 18px;
+  }
+  .own-side.is-anthropic .own-kicker { color: var(--ink-200); }
+  .own-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px 0;
+  }
+  .own-list li {
+    padding: 8px 0;
+    border-top: 1px solid var(--ink-100);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink-900);
+  }
+  .own-list li:first-child { border-top: none; padding-top: 4px; }
+  .own-side.is-anthropic .own-list li {
+    color: var(--ink-0);
+    border-top-color: rgba(255,255,255,.08);
+  }
+  .own-foot {
+    padding-top: 14px;
+    border-top: 1px dashed var(--ink-100);
+    font-family: var(--font-serif-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-500);
+  }
+  .own-side.is-anthropic .own-foot {
+    color: var(--ink-200);
+    border-top-color: rgba(255,255,255,.1);
+  }
+  .own-foot strong {
+    color: var(--ink-900);
+    font-weight: 600;
+  }
+  .own-side.is-anthropic .own-foot strong { color: var(--latte-400); font-weight: 500; }
+
+  /* ===================================================================== */
+  /* Hero / sign-off                                                        */
+  /* ===================================================================== */
+  .hero {
+    max-width: var(--measure);
+    margin: 0 auto 96px;
+    padding: 0 24px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-eyebrow::before {
+    content: "";
+    width: 28px; height: 1px;
+    background: var(--latte-400);
+  }
+  .hero h1 {
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink-900);
+    margin-bottom: 16px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--rust);
+  }
+  .hero p {
+    font-family: var(--font-serif-body);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink-500);
+    max-width: 600px;
+    margin-bottom: 22px;
+  }
+  .hero-byline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink-400);
+  }
+  .hero-byline .av {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--latte-400), var(--espresso-700));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream-100);
+    font-family: var(--font-serif-display);
+    font-weight: 600;
+    font-style: italic;
+    font-size: 16px;
+  }
+  .hero-byline strong {
+    color: var(--ink-900);
+    font-weight: 600;
+  }
+
+  @media (max-width: 720px) {
+    body { font-size: 16px; padding: 24px 0 48px; }
+    .hero { padding: 0 20px; margin-bottom: 32px; }
+    .hero h1 { font-size: 40px; }
+    .hero p { font-size: 19px; }
+    .fig {
+      padding: 28px 22px 24px;
+      margin-bottom: 24px;
+      border-radius: 3px;
+    }
+    .fig-eyebrow { font-size: 11px; margin-bottom: 14px; }
+    .fig-title { font-size: 28px; line-height: 1.12; margin-bottom: 12px; }
+    .fig-dek { font-size: 17px; line-height: 1.5; margin-bottom: 24px; }
+    .fig-caption { font-size: 14px; flex-direction: column; align-items: flex-start; gap: 6px; }
+    .fig-caption .byline { font-size: 10px; }
+
+    /* DIAGRAM 1 */
+    .loop { padding: 20px 16px 18px; }
+    .loop-stage-row { grid-template-columns: 1fr; gap: 12px; }
+    .loop-card { padding: 18px 16px 16px; }
+    .loop-card .stagenum { font-size: 30px; margin-bottom: 8px; }
+    .loop-card h4 { font-size: 22px; }
+    .loop-card p { font-size: 15px; }
+    .loop-card .role { font-size: 11px; }
+    .loop-states { grid-template-columns: 1fr; gap: 12px; padding-top: 18px; margin-top: 20px; }
+    .pill { font-size: 12px; padding: 5px 11px; }
+    .loop-feedback { font-size: 14px; }
+
+    /* DIAGRAM 2 — events */
+    .events { grid-template-columns: 1fr; border-top: none; }
+    .ev-row .ev-time, .ev-row .ev-body {
+      padding: 12px 0;
+      border-bottom: none;
+      padding-left: 0;
+      border-left: none;
+      margin-left: 0;
+    }
+    .ev-time {
+      padding-top: 16px;
+      border-top: 1px solid var(--ink-100);
+      font-size: 11px;
+    }
+    .ev-row:first-child .ev-time { border-top: none; padding-top: 0; }
+    .ev-time::after { display: none; }
+    .ev-name { font-size: 15px; }
+    .ev-desc { font-size: 16px; }
+    .ev-tag { font-size: 10px; }
+    .ev-foot { font-size: 16px; padding: 16px; }
+    .ev-foot code { font-size: 13px; }
+
+    /* DIAGRAM 3 — twocol */
+    .twocol { grid-template-columns: 1fr; border: none; }
+    .twocol > .col, .twocol > .col + .col {
+      padding: 22px 0;
+      border-right: none;
+      border-top: 1px solid var(--ink-100);
+    }
+    .twocol > .col:first-child { border-top: 2px solid var(--ink-900); padding-top: 22px; }
+    .twocol > .col:last-child { border-bottom: 2px solid var(--ink-900); padding-bottom: 22px; }
+    .col-year { font-size: 48px; }
+    .col-h { font-size: 20px; }
+    pre.snippet { font-size: 13px; line-height: 1.6; }
+    .col-foot { font-size: 15px; }
+
+    /* DIAGRAM 4 */
+    .spectrum { grid-template-columns: 1fr; gap: 12px; }
+    .spectrum-bar-labels { display: none; }
+    .spectrum-bar { margin-bottom: 18px; }
+    .sp-h { font-size: 21px; }
+    .sp-sub { font-size: 14px; }
+    .sp-rows li { font-size: 15px; }
+    .sp-foot { font-size: 12px; }
+
+    /* DIAGRAM 5 — arch */
+    .arch { grid-template-columns: 1fr; gap: 12px; }
+    .arch-card h5 { font-size: 24px; }
+    .arch-card p { font-size: 15px; }
+    .arch-card .api code { font-size: 12px; }
+    .arch-bus { flex-direction: column; align-items: flex-start; padding: 16px 18px; margin-top: 4px; }
+    .arch-bus-title { font-size: 19px; }
+    .arch-bus-api { justify-content: flex-start; }
+    .arch-bus-api code { font-size: 12px; }
+    .perf-stat { grid-template-columns: 1fr; gap: 16px; padding-top: 18px; margin-top: 20px; }
+    .perf-stat-block .num { font-size: 56px; }
+    .perf-stat-block .lbl { font-size: 14px; }
+
+    /* DIAGRAM 6 — twin */
+    .twin-wrap { padding: 18px 16px 16px; }
+    .twin-row { grid-template-columns: 1fr; gap: 12px; }
+    .twin-h { font-size: 22px; }
+    .twin-p { font-size: 15px; }
+    .twin-card .api code { font-size: 12px; }
+    .twin-bus-events { font-size: 12px; }
+    .twin-bus-h .sid { font-size: 13px; }
+
+    /* DIAGRAM 7 — table */
+    table.layers thead { display: none; }
+    table.layers, table.layers tbody { display: block; width: 100%; }
+    table.layers tr {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4px 12px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--ink-100);
+    }
+    table.layers tr:last-child { border-bottom: none; }
+    table.layers tbody td { display: block; padding: 0; border: none; }
+    table.layers .col-name { grid-column: 1; font-size: 21px; }
+    table.layers .col-status { grid-column: 2; align-self: start; padding-top: 4px; }
+    table.layers .col-was { grid-column: 1 / -1; padding-top: 6px; }
+    table.layers .col-was code { font-size: 13px; }
+    table.layers .col-sku { grid-column: 1 / -1; font-size: 19px; padding-top: 4px; }
+
+    /* DIAGRAM 8 — h-grid */
+    .h-grid { grid-template-columns: 1fr; }
+    .h-arrow { padding: 14px 0; transform: rotate(90deg); }
+    .h-h { font-size: 21px; }
+    .h-list li { font-size: 15px; }
+    .h-side.is-after .h-list li { font-size: 19px; }
+    .h-foot { font-size: 14px; }
+
+    /* DIAGRAM 9 — ladder */
+    .ladder-step { grid-template-columns: 64px 1fr; gap: 16px; padding: 24px 0; }
+    .ladder-rank { font-size: 56px; }
+    .ladder-h { font-size: 22px; }
+    .ladder-sub { font-size: 16px; }
+    .ladder-meta { grid-template-columns: 1fr; gap: 10px; padding-top: 12px; }
+    .ladder-meta dd { font-size: 14px; }
+
+    /* DIAGRAM 10 — own */
+    .own { grid-template-columns: 1fr; border-top: 2px solid var(--ink-900); border-bottom: 2px solid var(--ink-900); }
+    .own-side { padding: 24px 20px; }
+    .own-side.is-yours { border-right: none; border-bottom: 1px solid var(--ink-100); }
+    .own-h { font-size: 26px; }
+    .own-list li { font-size: 15px; }
+    .own-foot { font-size: 14px; }
+  }
+
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..900;1,300..900&family=Source+Serif+4:ital,wght@0,300..900;1,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============== HERO ============== -->
+<header class="hero">
+  <div class="hero-eyebrow">Field notes · May 2026</div>
+  <h1>The harness is the new <em>moat</em>.</h1>
+  <p>Ten diagrams on what Anthropic shipped on May 6 — and why the eval loop you wrote in 2024 just became someone else's product.</p>
+  <div class="hero-byline">
+    <div class="av">H</div>
+    <div>By <strong>Han HELOIR YAN, Ph.D. ☕️</strong> · Data Science Collective</div>
+  </div>
+</header>
+
+<div class="dotsep">· · ·</div>
+
+<!-- ============== DIAGRAM 1 ============== -->
+<figure class="fig">
+  <div class="fig-eyebrow">
+    <span class="num">Figure 01</span>
+    <span class="rule"></span>
+    <span class="kicker">the loop, sketched</span>
+  </div>
+  <h2 class="fig-title">Outcomes is a loop, not a feature.</h2>
+  <p class="fig-dek">A rubric defines done. A second Claude — running in its own context window — decides done. The agent revises until done.</p>
+
+  <div class="loop">
+    <div class="loop-stage-row">
+      <div class="loop-card">
+        <div class="stagenum">01</div>
+        <div class="role">Input</div>
+        <h4>Rubric</h4>
+        <p>Markdown describing what success looks like for this task. You write it. Anthropic reads it.</p>
+      </div>
+      <div class="loop-card">
+        <div class="stagenum">02</div>
+        <div class="role">Worker</div>
+        <h4>Agent</h4>
+        <p>Claude works on the task. Reads context, runs tools, produces output to the session.</p>
+      </div>
+      <div class="loop-card is-grader">
+        <div class="stagenum-ribbon">isolated context</div>
+        <div class="stagenum">03</div>
+        <div class="role">Judge</div>
+        <h4>Grader</h4>
+        <p>A separate Claude reads only the rubric and the output. Returns one of five terminal states.</p>
+      </div>
+    </div>
+
+    <div class="loop-states">
+      <div class="loop-states-label">
+        <strong>Five outcomes</strong>
+        only one is success
+      </div>
+      <div class="loop-states-pills">
+        <span class="pill is-good">satisfied</span>
+        <span class="pill is-revise">needs_revision</span>
+        <span class="pill">max_iterations_reached</span>
+        <span class="pill">failed</span>
+        <span class="pill">interrupted</span>
+      </div>
+    </div>
+
+    <div class="loop-feedback">
+      <span><em>needs_revision</em> sends grader feedback back to the agent and the loop runs again</span>
+      <div class="loop-feedback-line"></div>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14l-5-5 5-5"></path><path d="M20 19v-6a4 4 0 0 0-4-4H5"></path></svg>
+    </div>
+  </div>
+
+  <figcaption class="fig-caption">
+    <span><strong>Key insight.</strong> The grader runs in its own context window. It cannot see the agent's reasoning — only the output.</span>
+    <span class="byline">Han HELOIR YAN ☕️</span>
+  </figcaption>
+</figure>
+
+<!-- ============== DIAGRAM 2 ============== -->
+<figure class="fig">
+  <div class="fig-eyebrow">
+    <span class="num">Figure 02</span>
+    <span class="rule"></span>
+    <span class="kicker">on the wire</span>
+  </div>
+  <h2 class="fig-title">The lifecycle, as events.</h2>
+  <p class="fig-dek">Five events fire from definition to terminal state. Subscribe to any of them via webhooks. No polling.</p>
+
+  <div class="events">
+    <div class="ev-row is-start">
+      <div class="ev-time">t₀ · open</div>
+      <div class="ev-body">
+        <div class="ev-name">user.define_outcome <span class="ev-tag">user event</span></div>
+        <p class="ev-desc">You attach a rubric to a session. The outcome is now active and will gate the agent's work.</p>
+      </div>
+    </div>
+    <div class="ev-row is-running">
+      <div class="ev-time">t₁ · spin-up</div>
+      <div class="ev-body">
+        <div class="ev-name">span.outcome_evaluation_start <span class="ev-tag">grader</span></div>
+        <p class="ev-desc">Agent has produced output. The grader spins up in its own context window and begins reading the rubric.</p>
+      </div>
+    </div>
+    <div class="ev-row is-running">
+      <div class="ev-time">t₂ · scoring</div>
+      <div class="ev-body">
+        <div class="ev-name">span.outcome_evaluation_ongoing <span class="ev-tag">grader</span></div>
+        <p class="ev-desc">Grader is mid-evaluation. Useful for surfacing live status in the Claude Console.</p>
+      </div>
+    </div>
+    <div class="ev-row is-decide">
+      <div class="ev-time">t₃ · verdict</div>
+      <div class="ev-body">
+        <div class="ev-name">span.outcome_evaluation_end <span class="ev-tag">grader</span></div>
+        <p class="ev-desc">Grader returns its decision. The session moves into one of five terminal states.</p>
+        <div class="ev-terminals">
+          <span class="pill is-good">satisfied</span>
+          <span class="pill is-revise">needs_revision</span>
+          <span class="pill">max_iter</span>
+          <span class="pill">failed</span>
+          <span class="pill">interrupted</span>
+        </div>
+      </div>
+    </div>
+    <div class="ev-row is-fire">
+      <div class="ev-time">t₄ · close</div>
+      <div class="ev-body">
+        <div class="ev-name">webhook fires <span class="ev-tag">external</span></div>
+        <p class="ev-desc">Your endpoint receives notification. The agent run is finished. No polling required.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ev-foot">
+    Default loop runs up to <strong>3 iterations</strong>. Maximum is <strong>20</strong>. Beta header: <code>managed-agents-2026-04-01</code>.
+  </div>
+
+  <figcaption class="fig-caption">
+    <span><strong>Read it as a stream.</strong> Each row is one row in your event log.</span>
+    <span class="byline">Han HELOIR YAN ☕️</span>
+  </figcaption>
+</figure>
+
+<!-- ============== DIAGRAM 3 ============== -->
+<figure class="fig">
+  <div class="fig-eyebrow">
+    <span class="num">Figure 03</span>
+    <span class="rule"></span>
+    <span class="kicker">same pattern, different decade</span>
+  </div>
+  <h2 class="fig-title">You shipped this in 2024. Anthropic shipped it again — as a SKU.</h2>
+  <p class="fig-dek">The evaluator-optimizer pattern was published in December 2024. Eighteen months later it became a managed product.</p>
+
+  <div class="twocol">
+    <div class="col">
+      <div class="col-year">2024</div>
+      <div class="col-label">You build it</div>
+      <div class="col-h">A Python while-loop in your repo</div>
+<pre class="snippet"><span class="c"># your loop, in your code</span>
+<span class="k">while</span> not satisfied:
+    output = agent(task)
+    score  = evaluator(rubric, output)
+    <span class="k">if</span> score.passed:
+        <span class="k">break</span>
+    <span class="k">if</span> attempts &gt; MAX:
+        <span class="k">raise</span>
+    feedback = score.notes</pre>
+      <div class="col-foot">You own the rubric, the eval prompt, the retry logic, error handling, observability, deployment — and version compatibility every time the model gets smarter.</div>
+    </div>
+    <div class="col">
+      <div class="col-year">2026</div>
+      <div class="col-label">Anthropic ships it</div>
+      <div class="col-h">A single API call, server-side</div>
+<pre class="snippet is-new"><span class="c"># the API call</span>
+define_outcome(
+    session=sid,
+    rubric=rubric_md,
+    max_iterations=<span class="k">3</span>,
+)
+<span class="c"># loop runs server side</span>
+<span class="c"># webhook fires on completion</span></pre>
+      <div class="col-foot">You own the rubric. Anthropic owns the grader, the loop, the retries, the iteration budget, the telemetry, and the model-upgrade path. <strong>$0.08 per runtime hour</strong> + token rates.</div>
+    </div>
+  </div>
+
+  <figcaption class="fig-caption">
+    <span><strong>The pattern wasn't the hard part.</strong> The maintenance was. That's what Anthropic decided to sell.</span>
+    <span class="byline">Han HELOIR YAN ☕️</span>
+  </figcaption>
+</figure>
+
+<!-- ============== DIAGRAM 4 ============== -->
+<figure class="fig">
+  <div class="fig-eyebrow">
+    <span class="num">Figure 04</span>
+    <span class="rule"></span>
+    <span class="kicker">control vs. burden</span>
+  </div>
+  <h2 class="fig-title">Three places the eval loop can live.</h2>
+  <p class="fig-dek">From "you maintain everything" to "you write a markdown file." The trade is control versus burden — and the gradient runs only one way.</p>
+
+  <div class="spectrum-bar">
+    <div></div><div></div><div></div>
+  </div>
+  <div class="spectrum-bar-labels">
+    <span>full control · full burden</span>
+    <span>partial · partial</span>
+    <span>minimal · minimal</span>
+  </div>
+
+  <div class="spectrum">
+    <div class="sp-card">
+      <div class="sp-num">i.</div>
+      <div class="sp-h">Hand-rolled</div>
+      <div class="sp-sub">Pure Python. While-loop, two prompts, retry counter.</div>
+      <ul class="sp-rows">
+        <li><span class="rk">You own</span>Rubric · eval prompt · loop · retry · errors · ops.</li>
+        <li><span class="rk">Cost</span>Weeks to build. Rewrites every model upgrade.</li>
+        <li><span class="rk">Locks you to</span>Nothing. Full portability.</li>
+      </ul>
+      <div class="sp-foot">full burden</div>
+    </div>
+    <div class="sp-card">
+      <div class="sp-num">ii.</div>
+      <div class="sp-h">Framework</div>
+      <div class="sp-sub">CrewAI, LangGraph, DSPy. The loop is provided.</div>
+      <ul class="sp-rows">
+        <li><span class="rk">You own</span>Rubric · eval prompt · framework expertise.</li>
+        <li><span class="rk">Cost</span>Upgrade compatibility. Version drift. Abstraction leaks.</li>
+        <li><span class="rk">Locks you to</span>The framework's worldview.</li>
+      </ul>
+      <div class="sp-foot">shared burden</div>
+    </div>
+    <div class="sp-card is-managed">
+      <div class="sp-num">iii.</div>
+      <div class="sp-h">Outcomes</div>
+      <div class="sp-sub">Markdown rubric. Anthropic runs the loop on your session.</div>
+      <ul class="sp-rows">
+        <li><span class="rk">You own</span>The rubric.</li>
+        <li><span class="rk">Cost</span>$0.08 / runtime hour + standard token rates.</li>
+        <li><span class="rk">Locks you to</span>Claude only. No multi-model migration.</li>
+      </ul>
+      <div class="sp-foot">minimal burden</div>
+    </div>
+  </div>
+
+  <figcaption class="fig-caption">
+    <span><strong>The same loop runs in all three.</strong> What changes is who maintains it the day the next model ships.</span>
+    <span class="byline">Han HELOIR YAN ☕️</span>
+  </figcaption>
+</figure>
+
+<!-- ============== DIAGRAM 5 ============== -->
+<figure class="fig">
+  <div class="fig-eyebrow">
+    <span class="num">Figure 05</span>
+    <span class="rule"></span>
+    <span class="kicker">the april 8 rebuild</span>
+  </div>
+  <h2 class="fig-title">Three primitives. One bus.</h2>
+  <p class="fig-dek">Anthropic's April rebuild separated the agent into brain, hands, and session. Everything they shipped on May 6 depends on this decoupling.</p>
+
+  <div class="arch">
+    <div class="arch-card is-brain">
+      <div class="ico">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4a2f1e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9.5 2A4.5 4.5 0 0 0 5 6.5c-1.5.7-2.5 2.2-2.5 4 0 1.3.5 2.5 1.4 3.4-.3.5-.4 1.1-.4 1.7 0 1.7 1.3 3.1 3 3.4 0 .9.7 1.7 1.5 2 .5 1.2 1.7 2 3 2 1.7 0 3-1.3 3-3"></path>
+          <path d="M14.5 2A4.5 4.5 0 0 1 19 6.5c1.5.7 2.5 2.2 2.5 4 0 1.3-.5 2.5-1.4 3.4.3.5.4 1.1.4 1.7 0 1.7-1.3 3.1-3 3.4 0 .9-.7 1.7-1.5 2-.5 1.2-1.7 2-3 2-1.7 0-3-1.3-3-3"></path>
+        </svg>
+      </div>
+      <div class="role-tag">module · 1</div>
+      <h5>Brain</h5>
+      <p>Claude plus the harness loop. Stateless from the harness perspective. Recoverable on crash.</p>
+      <div class="api"><code>wake(sessionId)</code></div>
+    </div>
+    <div class="arch-card is-session">
+      <div class="ico">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#191919" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M3 5v14a9 3 0 0 0 18 0V5"></path>
+          <path d="M3 12a9 3 0 0 0 18 0"></path>
+        </svg>
+      </div>
+      <div class="role-tag">module · 2</div>
+      <h5>Session</h5>
+      <p>An append-only event log. Durable. Queryable. The substrate that survives every crash.</p>
+      <div class="api"><code>emitEvent(e)</code><code>getEvents()</code></div>
+    </div>
+    <div class="arch-card is-hands">
+      <div class="ico">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#156d12" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+        </svg>
+      </div>
+      <div class="role-tag">module · 3</div>
+      <h5>Hands</h5>
+      <p>Sandboxes, MCP servers, tools. Uniform interface, regardless of what runs underneath.</p>
+      <div class="api"><code>execute(name,in)</code><code>provision(r)</code></div>
+    </div>
+
+    <div class="arch-bus">
+      <div class="arch-bus-title">
+        <small>The bus</small>
+        Everything writes to the same session log.
+      </div>
+      <div class="arch-bus-api">
+        <code>emitEvent</code><code>getEvents</code><code>execute</code><code>provision</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="perf-stat">
+    <div class="perf-stat-block">
+      <div class="num">−60<span class="pct">%</span></div>
+      <div class="lbl"><strong>p50 ttft</strong>Time to first token, after the rebuild.</div>
+    </div>
+    <div class="perf-stat-block">
+      <div class="num">−90<span class="pct">%</span></div>
+      <div class="lbl"><strong>p95 ttft</strong>The recovery cliff disappeared.</div>
+    </div>
+  </div>
+
+  <figcaption class="fig-caption">
+    <span><strong>Why this matters.</strong> Once the harness was decoupled, every layer above it could be sold separately.</span>
+    <span class="byline">Han HELOIR YAN ☕️</span>
+  </figcaption>
+</figure>
+
+<!-- ============== DIAGRAM 6 ============== -->
+<figure class="fig">
+  <div class="fig-eyebrow">
+    <span class="num">Figure 06</span>
+    <span class="rule"></span>
+    <span class="kicker">two brains, one log</span>
+  </div>
+  <h2 class="fig-title">Outcomes is a second brain on the same bus.</h2>
+  <p class="fig-dek">The grader does not share memory with the worker. It reads the same session, scores the output, and writes its decision back as an event.</p>
+
+  <div class="twin-wrap">
+    <div class="twin-row">
+      <div class="twin-card">
+        <div class="twin-role">brain · worker</div>
+        <div class="twin-h">Worker</div>
+        <p class="twin-p">Does the task. Writes output to the session log. Has its own context window — full of reasoning, tool calls, retries.</p>
+        <div class="api">
+          <code>emitEvent(output)</code>
+        </div>
+      </div>
+      <div class="twin-card is-grader">
+        <div class="grader-tag">isolated context</div>
+        <div class="twin-role">brain · judge</div>
+        <div class="twin-h">Grader</div>
+        <p class="twin-p">Reads rubric and output from the session. Returns a decision event. Cannot see the worker's reasoning.</p>
+        <div class="api">
+          <code>getEvents()</code>
+          <code>emitEvent(decision)</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="twin-bus">
+      <div class="twin-bus-h">
+        <span class="lbl">shared session</span>
+        <span class="sid">sesn_01HX9K4BR…</span>
+      </div>
+      <div class="twin-bus-events">
+        <span>user.define_outcome</span>
+        <span class="arrow">→</span>
+        <span>tool.call</span>
+        <span class="arrow">→</span>
+        <span>tool.result</span>
+        <span class="arrow">→</span>
+        <span>output.complete</span>
+        <span class="arrow">→</span>
+        <span>outcome_evaluation_start</span>
+        <span class="arrow">→</span>
+        <span>outcome_evaluation_end</span>
+        <span class="arrow">→</span>
+        <span class="term">satisfied</span>
+      </div>
+    </div>
+  </div>
+
+  <figcaption class="fig-caption">
+    <span><strong>That isolation is what makes the score honest.</strong> The grader sees only what the worker chose to emit.</span>
+    <span class="byline">Han HELOIR YAN ☕️</span>
+  </figcaption>
+</figure>
+
+<!-- ============== DIAGRAM 7 ============== -->
+<figure class="fig">
+  <div class="fig-eyebrow">
+    <span class="num">Figure 07</span>
+    <span class="rule"></span>
+    <span class="kicker">your code, their products</span>
+  </div>
+  <h2 class="fig-title">Four harness layers. Four SKUs.</h2>
+  <p class="fig-dek">What used to live in your code now ships as managed product. Each layer extracted on the same brain, hands, and session substrate.</p>
+
+  <table class="layers">
+    <thead>
+      <tr>
+        <th>Layer</th>
+        <th>Lived in your code as…</th>
+        <th>Now ships as</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="col-name">Verification</td>
+        <td class="col-was"><code>while not satisfied:</code></td>
+        <td class="col-sku sku-1">Outcomes</td>
+        <td class="col-status"><span class="badge is-preview">Public beta</span></td>
+      </tr>
+      <tr>
+        <td class="col-name">Memory curation</td>
+        <td class="col-was">Nightly cron + summarizer</td>
+        <td class="col-sku sku-2">Dreams</td>
+        <td class="col-status"><span class="badge">Research preview</span></td>
+      </tr>
+      <tr>
+        <td class="col-name">Orchestration</td>
+        <td class="col-was">asyncio + dispatch table</td>
+        <td class="col-sku sku-3">Multi-Agent</td>
+        <td class="col-status"><span class="badge is-preview">Public beta</span></td>
+      </tr>
+      <tr>
+        <td class="col-name">Lifecycle hooks</td>
+        <td class="col-was">Polling + handlers</td>
+        <td class="col-sku sku-4">Webhooks</td>
+        <td class="col-status"><span class="badge is-preview">Public beta</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <figcaption class="fig-caption">
+    <span><strong>All four ride the same April 8 substrate.</strong> The decoupling shipped first; the layers shipped second.</span>
+    <span class="byline">Han HELOIR YAN ☕️</span>
+  </figcaption>
+</figure>
+
+<!-- ============== DIAGRAM 8 ============== -->
+<figure class="fig">
+  <div class="fig-eyebrow">
+    <span class="num">Figure 08</span>
+    <span class="rule"></span>
+    <span class="kicker">code → product line</span>
+  </div>
+  <h2 class="fig-title">Yesterday you built it. Today you compose it.</h2>
+  <p class="fig-dek">The eval loop, the memory pipeline, the dispatcher, the hook handler — every one of them used to live in your repo. Now each is a separately purchased SKU.</p>
+
+  <div class="h-grid">
+    <div class="h-side">
+      <div class="h-tag">Yesterday</div>
+      <div class="h-h">Harness as code</div>
+      <ul class="h-list">
+        <li><span class="h-marker"></span>your eval loop</li>
+        <li><span class="h-marker"></span>your memory pipeline</li>
+        <li><span class="h-marker"></span>your orchestrator</li>
+        <li><span class="h-marker"></span>your webhook handlers</li>
+      </ul>
+      <div class="h-foot">All your code. All your maintenance. Every quarter, something upstream changes and you rewrite a piece.</div>
+    </div>
+    <div class="h-arrow">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+    </div>
+    <div class="h-side is-after">
+      <div class="h-tag">Today</div>
+      <div class="h-h" style="color: var(--ink-0);">Harness as products</div>
+      <ul class="h-list">
+        <li><span class="h-marker"></span>Outcomes</li>
+        <li><span class="h-marker"></span>Dreams</li>
+        <li><span class="h-marker"></span>Multi-Agent</li>
+        <li><span class="h-marker"></span>Webhooks</li>
+      </ul>
+      <div class="h-foot">Each layer is a separately purchased SKU on Anthropic's substrate. You compose. You don't build.</div>
+    </div>
+  </div>
+
+  <figcaption class="fig-caption">
+    <span><strong>The agent template is becoming the unit of distribution.</strong> The harness is becoming infrastructure underneath it.</span>
+    <span class="byline">Han HELOIR YAN ☕️</span>
+  </figcaption>
+</figure>
+
+<!-- ============== DIAGRAM 9 ============== -->
+<figure class="fig">
+  <div class="fig-eyebrow">
+    <span class="num">Figure 09</span>
+    <span class="rule"></span>
+    <span class="kicker">leverage / commitment</span>
+  </div>
+  <h2 class="fig-title">Where to start. The adoption ladder.</h2>
+  <p class="fig-dek">Ranked by leverage divided by commitment. Outcomes pays for itself first. Multi-Agent pays last.</p>
+
+  <div class="ladder">
+    <div class="ladder-step is-1">
+      <div class="ladder-rank">01</div>
+      <div>
+        <div class="ladder-h">Outcomes first.</div>
+        <div class="ladder-sub">Highest leverage. Lowest commitment. The one I'd pilot this week.</div>
+        <dl class="ladder-meta">
+          <div><dt>Effort</dt><dd>One markdown rubric, one API call.</dd></div>
+          <div><dt>Rollback</dt><dd>An afternoon.</dd></div>
+          <div><dt>Cost</dt><dd>$0.08 / runtime hour + tokens.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="ladder-step is-2">
+      <div class="ladder-rank">02</div>
+      <div>
+        <div class="ladder-h">Dreams when memory rot is real.</div>
+        <div class="ladder-sub">Don't adopt prophylactically. Wait for evidence.</div>
+        <dl class="ladder-meta">
+          <div><dt>Trigger</dt><dd>Your memory store is a known liability.</dd></div>
+          <div><dt>Process</dt><dd>Schedule a dream, audit the diff, then let it land.</dd></div>
+          <div><dt>Note</dt><dd>Research preview — separate access required.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="ladder-step is-3">
+      <div class="ladder-rank">03</div>
+      <div>
+        <div class="ladder-h">Multi-Agent on greenfield only.</div>
+        <div class="ladder-sub">Migrating an existing orchestrator is a rewrite, not an upgrade.</div>
+        <dl class="ladder-meta">
+          <div><dt>When</dt><dd>Building a new agent system.</dd></div>
+          <div><dt>Constraint</dt><dd>Twenty parallel specialist ceiling.</dd></div>
+          <div><dt>Skip if</dt><dd>You already have a working orchestrator.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <figcaption class="fig-caption">
+    <span><strong>The maintenance burden you save</strong> pays for the constraints you accept.</span>
+    <span class="byline">Han HELOIR YAN ☕️</span>
+  </figcaption>
+</figure>
+
+<!-- ============== DIAGRAM 10 ============== -->
+<figure class="fig">
+  <div class="fig-eyebrow">
+    <span class="num">Figure 10</span>
+    <span class="rule"></span>
+    <span class="kicker">balance sheet</span>
+  </div>
+  <h2 class="fig-title">What you keep. What Anthropic owns.</h2>
+  <p class="fig-dek">Manage exposure by keeping the things that encode your product. Let Anthropic carry the runtime.</p>
+
+  <div class="own">
+    <div class="own-side is-yours">
+      <div class="own-tag">Yours · keep in repo</div>
+      <div class="own-h">You keep the <em>moat.</em></div>
+      <div class="own-kicker">What your product does — encoded.</div>
+      <ul class="own-list">
+        <li>Rubrics</li>
+        <li>Agent templates</li>
+        <li>Tool definitions</li>
+        <li>Prompts</li>
+        <li>Business logic</li>
+      </ul>
+      <div class="own-foot">Everything that encodes <strong>what your product does.</strong> This is your moat. Keep it in your repo.</div>
+    </div>
+    <div class="own-side is-anthropic">
+      <div class="own-tag">Anthropic · runtime</div>
+      <div class="own-h">They run the <em>runtime.</em></div>
+      <div class="own-kicker">How the harness runs — outsourced.</div>
+      <ul class="own-list">
+        <li>Eval loop and grader</li>
+        <li>Memory consolidation</li>
+        <li>Multi-agent orchestrator</li>
+        <li>Session log</li>
+        <li>Sandbox execution</li>
+        <li>Webhook delivery</li>
+        <li>Observability</li>
+      </ul>
+      <div class="own-foot">Everything that encodes <strong>how the harness runs.</strong> This is the runtime — and the eval loop never was your moat.</div>
+    </div>
+  </div>
+
+  <figcaption class="fig-caption">
+    <span><strong>The interfaces are stable per Anthropic's design intent.</strong> But nothing is forever — treat the harness as runtime, not source of truth.</span>
+    <span class="byline">Han HELOIR YAN ☕️</span>
+  </figcaption>
+</figure>
+
+<div class="dotsep">· · ·</div>
+
+<footer class="hero" style="margin-bottom: 0;">
+  <p style="font-style: normal; font-family: var(--font-sans); font-size: 14px; color: var(--ink-400); margin-bottom: 0;">
+    If this helped, I'd really appreciate your full 50 claps. It supports my work and helps others find it. ☕️
+  </p>
+</footer>
+
+
+
+</body></html>

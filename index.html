@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outcomes: Diagrams</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark: #141413;
+  --light: #faf9f5;
+  --mid-gray: #b0aea5;
+  --light-gray: #e8e6dc;
+  --orange: #d97757;
+  --blue: #6a9bcc;
+  --green: #788c5d;
+  --dark-soft: #2d2d2a;
+  --dark-muted: #5c5b55;
+  --dark-faint: #8a8880;
+  --orange-soft: #faf0eb;
+  --orange-mid: #ecc4b3;
+  --blue-soft: #eef4f9;
+  --blue-mid: #b8d4e8;
+  --green-soft: #f0f3ec;
+  --green-mid: #c0ccae;
+  --warm-bg: #f2f1ed;
+  --border: #e0ded6;
+  --border-soft: #eae8e2;
+  --red: #b54a3a;
+  --red-soft: #f9efed;
+  --amber: #b8923e;
+  --amber-soft: #f9f3e6;
+  --amber-mid: #dfc88e;
+  --shadow-sm: 0 1px 3px rgba(20,20,19,0.04), 0 1px 2px rgba(20,20,19,0.03);
+  --shadow-md: 0 4px 14px rgba(20,20,19,0.06), 0 1px 4px rgba(20,20,19,0.03);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+  background: var(--warm-bg);
+  color: var(--dark);
+  font-weight: 300;
+  line-height: 1.5;
+  padding: 32px 0;
+}
+.diagram-container {
+  max-width: 780px;
+  margin: 48px auto;
+  padding: 0 24px;
+}
+.card {
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  padding: 40px 36px 28px;
+  position: relative;
+}
+.card-number {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid-gray);
+  letter-spacing: 0.5px;
+}
+.card-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+.card-sub {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--dark-muted);
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+.card-body { margin-bottom: 24px; }
+.callout {
+  border-radius: 6px;
+  padding: 11px 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: center;
+  margin-top: 20px;
+}
+.callout-blue { background: var(--blue-soft); color: var(--blue); border: 1px solid var(--blue-mid); }
+.callout-green { background: var(--green-soft); color: var(--green); border: 1px solid var(--green-mid); }
+.callout-orange { background: var(--orange-soft); color: var(--orange); border: 1px solid var(--orange-mid); }
+.attribution {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--mid-gray);
+  text-align: right;
+  margin-top: 16px;
+  letter-spacing: 0.3px;
+}
+
+/* DIAGRAM 1 */
+.loop-flow { display: flex; flex-direction: column; gap: 24px; position: relative; }
+.loop-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+  position: relative;
+}
+.loop-step {
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 14px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.loop-step.is-blue { border-color: var(--blue-mid); }
+.loop-step.is-orange { border-color: var(--orange-mid); }
+.loop-step.is-green { border-color: var(--green-mid); }
+.step-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.step-icon.is-blue { background: var(--blue-soft); border: 1px solid var(--blue-mid); }
+.step-icon.is-orange { background: var(--orange-soft); border: 1px solid var(--orange-mid); }
+.step-icon.is-green { background: var(--green-soft); border: 1px solid var(--green-mid); }
+.step-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--dark-faint);
+  margin-bottom: 4px;
+}
+.step-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.step-desc {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--dark-muted);
+  line-height: 1.45;
+}
+.isolated-tag {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  background: var(--green-soft);
+  color: var(--green);
+  border: 1px solid var(--green-mid);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+.states-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 16px;
+  background: var(--warm-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+}
+.state-pill {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.3px;
+}
+.state-pill.is-success { background: var(--green-soft); color: var(--green); border: 1px solid var(--green-mid); }
+.state-pill.is-revise { background: var(--orange-soft); color: var(--orange); border: 1px solid var(--orange-mid); }
+.state-pill.is-terminal { background: var(--light); color: var(--dark-muted); border: 1px solid var(--border); }
+.loop-feedback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--orange);
+  margin-top: -4px;
+  gap: 8px;
+}
+.loop-feedback-line {
+  flex: 1;
+  height: 1.5px;
+  background: var(--orange-mid);
+  position: relative;
+}
+.loop-feedback-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 6px solid var(--orange-mid);
+}
+
+/* DIAGRAM 2 */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 12px;
+  bottom: 12px;
+  width: 1.5px;
+  background: var(--light-gray);
+}
+.timeline-event { position: relative; padding-bottom: 22px; }
+.timeline-event:last-child { padding-bottom: 0; }
+.timeline-dot {
+  position: absolute;
+  left: -23px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--light);
+  border: 2px solid var(--mid-gray);
+  z-index: 1;
+}
+.timeline-event.is-start .timeline-dot { border-color: var(--blue); box-shadow: 0 0 0 4px var(--blue-soft); }
+.timeline-event.is-progress .timeline-dot { border-color: var(--orange); }
+.timeline-event.is-end .timeline-dot { border-color: var(--green); box-shadow: 0 0 0 4px var(--green-soft); }
+.timeline-event.is-terminal .timeline-dot { background: var(--dark); border-color: var(--dark); }
+.timeline-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dark);
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+.timeline-desc {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--dark-muted);
+  line-height: 1.5;
+}
+.timeline-meta {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--dark-faint);
+  margin-left: 10px;
+}
+.terminal-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-top: 8px;
+}
+.terminal-cell {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  padding: 5px 4px;
+  border-radius: 4px;
+  border: 1px solid;
+}
+.terminal-cell.is-good { background: var(--green-soft); border-color: var(--green-mid); color: var(--green); }
+.terminal-cell.is-revise { background: var(--orange-soft); border-color: var(--orange-mid); color: var(--orange); }
+.terminal-cell.is-bad { background: var(--light); border-color: var(--border); color: var(--dark-muted); }
+
+/* NEW DIAGRAM 03: Detailed lifecycle additions to timeline */
+.iter-divider {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--dark-muted);
+  margin: 18px 0 14px -23px;
+  padding: 5px 12px;
+  background: var(--light);
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+.timeline-event.is-agent .timeline-dot {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 4px var(--orange-soft);
+}
+.timeline-event.is-grader .timeline-dot {
+  border-color: var(--green);
+}
+.timeline-event.is-grader-end .timeline-dot {
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px var(--green-soft);
+}
+.timeline-event.is-revision .timeline-dot {
+  border-color: var(--orange);
+  background: var(--orange-soft);
+  box-shadow: 0 0 0 4px var(--orange-soft);
+}
+.timeline-event.is-satisfied .timeline-dot {
+  border-color: var(--green);
+  background: var(--green-soft);
+  box-shadow: 0 0 0 4px var(--green-soft);
+}
+.code-stack-real {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+}
+
+/* DIAGRAM 3 */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+.compare-card {
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 16px 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+.compare-card.is-old { border-color: var(--border); }
+.compare-card.is-new { border-color: var(--orange-mid); }
+.compare-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.compare-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+.compare-tag.is-old {
+  background: var(--warm-bg);
+  color: var(--dark-faint);
+  border: 1px solid var(--border);
+}
+.compare-tag.is-new {
+  background: var(--orange-soft);
+  color: var(--orange);
+  border: 1px solid var(--orange-mid);
+}
+.compare-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark);
+}
+.code-stack {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--dark-soft);
+  background: var(--warm-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  white-space: pre;
+  overflow-x: auto;
+}
+.code-stack .code-comment { color: var(--dark-faint); font-style: italic; }
+.code-stack .code-keyword { color: var(--orange); }
+.compare-footer {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dark-muted);
+  line-height: 1.5;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-soft);
+  margin-top: auto;
+}
+.vs-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--mid-gray);
+  letter-spacing: 1px;
+  align-self: center;
+  padding: 0 4px;
+}
+
+/* DIAGRAM 4 */
+.spectrum-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.spectrum-card {
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 16px 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+.spectrum-card.is-tier1 { border-color: var(--border); }
+.spectrum-card.is-tier2 { border-color: var(--blue-mid); }
+.spectrum-card.is-tier3 { border-color: var(--orange-mid); }
+.spectrum-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--dark-faint);
+  margin-bottom: 6px;
+}
+.spectrum-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.spectrum-sub {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dark-muted);
+  line-height: 1.45;
+  margin-bottom: 14px;
+}
+.spectrum-list { list-style: none; padding: 0; margin: 0 0 14px 0; }
+.spectrum-list li {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dark-soft);
+  padding: 8px 0;
+  border-top: 1px solid var(--border-soft);
+  line-height: 1.45;
+}
+.spectrum-list li:first-child { border-top: none; padding-top: 4px; }
+.spectrum-list li .list-label {
+  font-weight: 500;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 3px;
+  color: var(--dark-faint);
+}
+.spectrum-footer {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 7px 8px;
+  border-radius: 4px;
+  margin-top: auto;
+}
+.spectrum-footer.is-burden { background: var(--warm-bg); color: var(--dark-faint); border: 1px solid var(--border); }
+.spectrum-footer.is-shared { background: var(--blue-soft); color: var(--blue); border: 1px solid var(--blue-mid); }
+.spectrum-footer.is-light { background: var(--orange-soft); color: var(--orange); border: 1px solid var(--orange-mid); }
+
+/* DIAGRAM 5 & 6: Brain/Hands/Session Architecture */
+.arch-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.arch-node {
+  background: var(--light);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.arch-node.is-brain { border-color: var(--orange-mid); background: var(--orange-soft); }
+.arch-node.is-session { border-color: var(--blue-mid); background: var(--blue-soft); }
+.arch-node.is-hands { border-color: var(--green-mid); background: var(--green-soft); }
+.arch-node.is-grader { border-color: var(--green-mid); background: var(--green-soft); }
+.arch-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.arch-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.arch-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: -0.1px;
+}
+.arch-sub {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--dark-muted);
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+.arch-api {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.arch-api code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 8px;
+  color: var(--dark-soft);
+}
+.arch-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  color: var(--dark-faint);
+  text-transform: uppercase;
+  position: relative;
+  padding: 4px 0;
+}
+.arch-connector::before,
+.arch-connector::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 1.5px;
+  background: var(--light-gray);
+  transform: translateX(-50%);
+}
+.arch-connector::before { top: -10px; height: 8px; }
+.arch-connector::after { bottom: -10px; height: 8px; }
+.arch-connector-label {
+  background: var(--warm-bg);
+  padding: 3px 10px;
+  border: 1px solid var(--border-soft);
+  border-radius: 100px;
+  z-index: 1;
+}
+.twin-brain-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.session-bar {
+  background: var(--blue-soft);
+  border: 1.5px solid var(--blue-mid);
+  border-radius: 6px;
+  padding: 14px 18px;
+  position: relative;
+}
+.session-bar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.session-bar-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--blue);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.session-bar-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+}
+.session-bar-events {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--dark-faint);
+  line-height: 1.55;
+  text-align: right;
+  flex: 1;
+}
+
+/* DIAGRAM 7: Layer table */
+.layer-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border-soft);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.layer-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1.5fr 1.2fr 1fr;
+  gap: 1px;
+  background: var(--border-soft);
+}
+.layer-cell {
+  background: var(--light);
+  padding: 12px 14px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--dark-soft);
+  display: flex;
+  align-items: center;
+}
+.layer-row.layer-header .layer-cell {
+  background: var(--warm-bg);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--dark-faint);
+  padding: 10px 14px;
+}
+.layer-cell.layer-name { font-weight: 600; color: var(--dark); }
+.layer-cell.layer-was code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  background: var(--warm-bg);
+  border: 1px solid var(--border-soft);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--dark-soft);
+}
+.layer-cell.layer-is {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+}
+.layer-cell.layer-is.is-orange { color: var(--orange); }
+.layer-cell.layer-is.is-blue { color: var(--blue); }
+.layer-cell.layer-is.is-green { color: var(--green); }
+.layer-cell.layer-is.is-amber { color: var(--amber); }
+.layer-cell.layer-status {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--dark-muted);
+  letter-spacing: 0.3px;
+}
+
+/* DIAGRAM 8: Harness list inside compare cards */
+.harness-list { list-style: none; padding: 0; margin: 0 0 14px 0; }
+.harness-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--dark);
+  padding: 8px 0;
+  border-top: 1px solid var(--border-soft);
+}
+.harness-list li:first-child { border-top: none; padding-top: 0; }
+.harness-marker {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.harness-marker.is-code { background: var(--mid-gray); }
+.harness-marker.is-orange { background: var(--orange); }
+.harness-marker.is-blue { background: var(--blue); }
+.harness-marker.is-green { background: var(--green); }
+.harness-marker.is-amber { background: var(--amber); }
+
+/* DIAGRAM 9: Adoption ladder */
+.ladder { display: flex; flex-direction: column; gap: 10px; }
+.ladder-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  align-items: start;
+}
+.ladder-step.is-orange { border-left: 3px solid var(--orange); }
+.ladder-step.is-blue { border-left: 3px solid var(--blue); }
+.ladder-step.is-green { border-left: 3px solid var(--green); }
+.ladder-rank {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dark-faint);
+  min-width: 32px;
+}
+.ladder-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.ladder-sub {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--dark-muted);
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+.ladder-meta { display: flex; flex-direction: column; gap: 4px; }
+.ladder-meta span {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dark-soft);
+  line-height: 1.5;
+}
+.ladder-meta strong {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  color: var(--dark-faint);
+  font-size: 10px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin-right: 6px;
+}
+
+/* DIAGRAM 10: Ownership grid */
+.ownership-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.ownership-card {
+  background: var(--light);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 16px;
+  box-shadow: var(--shadow-sm);
+}
+.ownership-card.is-yours { border-color: var(--green-mid); background: var(--green-soft); }
+.ownership-card.is-anthropic { border-color: var(--orange-mid); background: var(--orange-soft); }
+.ownership-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.ownership-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  background: var(--light);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ownership-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.ownership-list { list-style: none; padding: 0; margin: 0 0 12px 0; }
+.ownership-list li {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--dark-soft);
+  padding: 5px 0;
+  border-top: 1px solid var(--border-soft);
+}
+.ownership-list li:first-child { border-top: none; padding-top: 0; }
+.ownership-footer {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dark-muted);
+  line-height: 1.5;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-soft);
+}
+.ownership-footer strong { font-weight: 500; color: var(--dark); }
+
+@media (max-width: 600px) {
+  .card { padding: 28px 20px 22px; }
+  .card-title { font-size: 18px; }
+  .card-sub { font-size: 14px; margin-bottom: 22px; }
+  .loop-row { grid-template-columns: 1fr; gap: 12px; }
+  .terminal-grid { grid-template-columns: repeat(2, 1fr); }
+  .step-title { font-size: 14px; }
+  .step-desc { font-size: 12px; }
+  .compare-grid { grid-template-columns: 1fr; gap: 12px; }
+  .vs-divider { padding: 4px 0; }
+  .spectrum-grid { grid-template-columns: 1fr; gap: 12px; }
+  .twin-brain-row { grid-template-columns: 1fr; }
+  .session-bar-content { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .session-bar-events { text-align: left; }
+  .layer-table { gap: 8px; background: transparent; border: none; }
+  .layer-row {
+    grid-template-columns: 1fr 1fr;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px;
+    gap: 1px;
+  }
+  .layer-row.layer-header { display: none; }
+  .layer-cell { padding: 6px 8px; font-size: 11px; }
+  .layer-cell.layer-name {
+    grid-column: 1 / -1;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border-soft);
+    padding: 8px;
+  }
+  .ladder-step { grid-template-columns: 1fr; gap: 8px; padding: 14px 16px; }
+  .ladder-rank { font-size: 18px; }
+  .ownership-grid { grid-template-columns: 1fr; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- DIAGRAM 1 -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">01 / 11</div>
+    <div class="card-title">Outcomes is a loop, not a feature</div>
+    <div class="card-sub">Rubric defines done. A separate Claude in its own context window decides done. The agent revises until done.</div>
+    <div class="card-body">
+      <div class="loop-flow">
+        <div class="loop-row">
+          <div class="loop-step is-blue">
+            <div class="step-icon is-blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6a9bcc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <div class="step-label">Step 1</div>
+            <div class="step-title">Rubric</div>
+            <div class="step-desc">Markdown describing what success looks like for this task.</div>
+          </div>
+          <div class="loop-step is-orange">
+            <div class="step-icon is-orange">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <div class="step-label">Step 2</div>
+            <div class="step-title">Agent</div>
+            <div class="step-desc">Claude works on the task. Reads, runs tools, produces output.</div>
+          </div>
+          <div class="loop-step is-green">
+            <div class="isolated-tag">Isolated Context</div>
+            <div class="step-icon is-green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#788c5d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div class="step-label">Step 3</div>
+            <div class="step-title">Grader</div>
+            <div class="step-desc">Separate Claude reads rubric and output only. Returns one of five states.</div>
+          </div>
+        </div>
+        <div class="states-row">
+          <span class="state-pill is-success">satisfied</span>
+          <span class="state-pill is-revise">needs_revision</span>
+          <span class="state-pill is-terminal">max_iterations_reached</span>
+          <span class="state-pill is-terminal">failed</span>
+          <span class="state-pill is-terminal">interrupted</span>
+        </div>
+        <div class="loop-feedback">
+          <span>needs_revision sends feedback back to the agent</span>
+          <div class="loop-feedback-line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-green">
+      The grader runs in its own context window. It cannot see the agent's reasoning, only the output.
+    </div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<!-- DIAGRAM 2 -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">02 / 11</div>
+    <div class="card-title">The outcome lifecycle, as events</div>
+    <div class="card-sub">Five events fire from definition to terminal state. Subscribe to any of them via webhooks.</div>
+    <div class="card-body">
+      <div class="timeline">
+        <div class="timeline-event is-start">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">user.define_outcome <span class="timeline-meta">user event</span></div>
+          <div class="timeline-desc">You attach a rubric to a session. The outcome is now active and will gate the agent's work.</div>
+        </div>
+        <div class="timeline-event is-progress">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">span.outcome_evaluation_start <span class="timeline-meta">grader event</span></div>
+          <div class="timeline-desc">Agent has produced output. The grader spins up in its own context window and begins reading the rubric.</div>
+        </div>
+        <div class="timeline-event is-progress">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">span.outcome_evaluation_ongoing <span class="timeline-meta">grader event</span></div>
+          <div class="timeline-desc">Grader is mid evaluation. Useful for surfacing live status in the Claude Console.</div>
+        </div>
+        <div class="timeline-event is-end">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">span.outcome_evaluation_end <span class="timeline-meta">grader event</span></div>
+          <div class="timeline-desc">Grader returns its decision. The session moves into one of five terminal states.</div>
+          <div class="terminal-grid">
+            <div class="terminal-cell is-good">satisfied</div>
+            <div class="terminal-cell is-revise">needs_revision</div>
+            <div class="terminal-cell is-bad">max_iter</div>
+            <div class="terminal-cell is-bad">failed</div>
+            <div class="terminal-cell is-bad">interrupted</div>
+          </div>
+        </div>
+        <div class="timeline-event is-terminal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">webhook fires <span class="timeline-meta">external</span></div>
+          <div class="timeline-desc">Your endpoint receives notification. The agent run is finished. No polling required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-blue">
+      Default loop runs up to 3 iterations. Maximum is 20. Beta header: managed-agents-2026-04-01.
+    </div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<!-- DIAGRAM 3 (NEW): Detailed full lifecycle -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">03 / 11</div>
+    <div class="card-title">The full lifecycle, with iterations</div>
+    <div class="card-sub">Real events from a real run. Three actors emit them: you, the agent, the grader. The loop continues until the grader returns satisfied or the iteration cap is hit.</div>
+    <div class="card-body">
+      <div class="timeline">
+
+        <div class="timeline-event is-start">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">user.define_outcome <span class="timeline-meta">user</span></div>
+          <div class="timeline-desc">You attach a rubric to the session. The agent starts working immediately on receipt. No additional message event needed.</div>
+        </div>
+
+        <div class="iter-divider">Iteration 0</div>
+
+        <div class="timeline-event is-agent">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">agent.message · agent.tool_use <span class="timeline-meta">agent</span></div>
+          <div class="timeline-desc">Agent plans, reads files, runs scripts, produces a first draft of the deliverable.</div>
+        </div>
+
+        <div class="timeline-event is-grader">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">span.outcome_evaluation_start <span class="timeline-meta">grader · iter 0</span></div>
+          <div class="timeline-desc">Grader spins up in its own context window. Reads rubric and the agent's output. Cannot see the agent's reasoning.</div>
+        </div>
+
+        <div class="timeline-event is-grader">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">span.outcome_evaluation_ongoing <span class="timeline-meta">heartbeat</span></div>
+          <div class="timeline-desc">Periodic heartbeat while the grader evaluates. Grader's internal reasoning is opaque.</div>
+        </div>
+
+        <div class="timeline-event is-revision">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">span.outcome_evaluation_end <span class="timeline-meta">result: needs_revision</span></div>
+          <div class="timeline-desc">Grader returns per-criterion feedback: which checks pass, which fail, what to change. Agent reads the explanation and starts a new iteration.</div>
+        </div>
+
+        <div class="iter-divider">Iteration 1</div>
+
+        <div class="timeline-event is-agent">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">agent.message · agent.tool_use <span class="timeline-meta">agent</span></div>
+          <div class="timeline-desc">Agent revises in response to the specific gaps the grader identified. Edits files, reruns scripts, updates the deliverable.</div>
+        </div>
+
+        <div class="timeline-event is-grader">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">span.outcome_evaluation_start <span class="timeline-meta">grader · iter 1</span></div>
+          <div class="timeline-desc">Fresh grader instance. Re-evaluates the new output against the same rubric. The score does not drift across iterations because the grader has no memory of the previous run.</div>
+        </div>
+
+        <div class="timeline-event is-satisfied">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">span.outcome_evaluation_end <span class="timeline-meta">result: satisfied</span></div>
+          <div class="timeline-desc">All criteria met. Grader returns explanation listing which checks passed.</div>
+        </div>
+
+        <div class="timeline-event is-terminal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">session.idle <span class="timeline-meta">deliverables ready</span></div>
+          <div class="timeline-desc">Files are in /mnt/session/outputs/ on the agent's container. Pull them via the Files API scoped to the session.</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="callout callout-orange">
+      Default cap is 3 iterations. Maximum is 20. The session retains history across iterations so the agent reads prior feedback, but each grader is fresh.
+    </div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<!-- DIAGRAM 3 -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">04 / 11</div>
+    <div class="card-title">Same pattern. Different decade.</div>
+    <div class="card-sub">Anthropic published the evaluator-optimizer workflow in December 2024. They sold it as a managed feature in May 2026.</div>
+    <div class="card-body">
+      <div class="compare-grid">
+        <div class="compare-card is-old">
+          <div class="compare-header">
+            <span class="compare-tag is-old">2024</span>
+            <span class="compare-title">You build it</span>
+          </div>
+<pre class="code-stack"><span class="code-comment"># your loop, in your code</span>
+<span class="code-keyword">while</span> not satisfied:
+    output = agent(task)
+    score = evaluator(
+        rubric, output)
+    <span class="code-keyword">if</span> score.passed:
+        <span class="code-keyword">break</span>
+    <span class="code-keyword">if</span> attempts &gt; MAX:
+        <span class="code-keyword">raise</span>
+    feedback = score.notes</pre>
+          <div class="compare-footer">You own the rubric, the eval prompt, the retry logic, the error handling, the observability, the deployment, and the version compatibility when the model gets smarter.</div>
+        </div>
+        <div class="vs-divider">vs</div>
+        <div class="compare-card is-new">
+          <div class="compare-header">
+            <span class="compare-tag is-new">2026</span>
+            <span class="compare-title">Anthropic ships it</span>
+          </div>
+<pre class="code-stack"><span class="code-comment"># the actual API call</span>
+client.beta.sessions.events.send(
+  session_id=sid,
+  events=[{
+    "type": "user.define_outcome",
+    "rubric": {
+      "type": "text",
+      "content": RUBRIC},
+    "max_iterations": 3,
+  }],
+)</pre>
+          <div class="compare-footer">You own the rubric. Anthropic owns the grader, the loop, the retry, the iteration budget, the observability, and the model upgrade path. Billed at $0.08 per runtime hour plus token rates.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-orange">
+      The pattern is not the hard part. The maintenance was. That is what Anthropic decided to sell.
+    </div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<!-- DIAGRAM 4 -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">05 / 11</div>
+    <div class="card-title">Three places the eval loop can live</div>
+    <div class="card-sub">From "you maintain everything" to "you write a markdown file." The trade is control versus burden.</div>
+    <div class="card-body">
+      <div class="spectrum-grid">
+        <div class="spectrum-card is-tier1">
+          <div class="spectrum-num">Path 1</div>
+          <div class="spectrum-title">Hand rolled</div>
+          <div class="spectrum-sub">Pure Python. While loop, two prompts, retry counter.</div>
+          <ul class="spectrum-list">
+            <li><span class="list-label">You own</span>Rubric, eval prompt, loop, retry, errors, observability, deployment.</li>
+            <li><span class="list-label">Cost</span>Weeks to build. Ongoing maintenance. Rewrites every model upgrade.</li>
+            <li><span class="list-label">Locks you to</span>Nothing. Full portability.</li>
+          </ul>
+          <div class="spectrum-footer is-burden">Full burden</div>
+        </div>
+        <div class="spectrum-card is-tier2">
+          <div class="spectrum-num">Path 2</div>
+          <div class="spectrum-title">Framework</div>
+          <div class="spectrum-sub">CrewAI, LangGraph, DSPy. The loop is provided.</div>
+          <ul class="spectrum-list">
+            <li><span class="list-label">You own</span>Rubric, eval prompt, framework expertise.</li>
+            <li><span class="list-label">Cost</span>Framework upgrade compatibility. Version drift. Abstraction leaks.</li>
+            <li><span class="list-label">Locks you to</span>The framework's worldview.</li>
+          </ul>
+          <div class="spectrum-footer is-shared">Shared burden</div>
+        </div>
+        <div class="spectrum-card is-tier3">
+          <div class="spectrum-num">Path 3</div>
+          <div class="spectrum-title">Managed (Outcomes)</div>
+          <div class="spectrum-sub">Markdown rubric. Anthropic runs the loop on your session.</div>
+          <ul class="spectrum-list">
+            <li><span class="list-label">You own</span>The rubric.</li>
+            <li><span class="list-label">Cost</span>$0.08 per runtime hour plus standard token rates.</li>
+            <li><span class="list-label">Locks you to</span>Claude only. No multi model migration path.</li>
+          </ul>
+          <div class="spectrum-footer is-light">Minimal burden</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-blue">
+      The same loop runs in all three. What changes is who maintains it the day the next model ships.
+    </div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<!-- DIAGRAM 5 -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">06 / 11</div>
+    <div class="card-title">Three primitives. One bus.</div>
+    <div class="card-sub">Anthropic's April 8 rebuild separated the agent into brain, hands, and session. Everything they shipped on May 6 depends on this.</div>
+    <div class="card-body">
+      <div class="arch-stack">
+
+        <div class="arch-node is-brain">
+          <div class="arch-header">
+            <div class="arch-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <div class="arch-title">Brain</div>
+          </div>
+          <div class="arch-sub">Claude plus the harness loop. Stateless from the harness perspective. Recoverable on crash.</div>
+          <div class="arch-api">
+            <code>wake(sessionId)</code>
+          </div>
+        </div>
+
+        <div class="arch-connector">
+          <span class="arch-connector-label">emitEvent · getEvents</span>
+        </div>
+
+        <div class="arch-node is-session">
+          <div class="arch-header">
+            <div class="arch-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6a9bcc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                <path d="M3 5v14a9 3 0 0 0 18 0V5"/>
+                <path d="M3 12a9 3 0 0 0 18 0"/>
+              </svg>
+            </div>
+            <div class="arch-title">Session</div>
+          </div>
+          <div class="arch-sub">Append only event log. Durable. Queryable. The substrate that survives every crash.</div>
+          <div class="arch-api">
+            <code>emitEvent(event)</code>
+            <code>getEvents()</code>
+          </div>
+        </div>
+
+        <div class="arch-connector">
+          <span class="arch-connector-label">execute · provision</span>
+        </div>
+
+        <div class="arch-node is-hands">
+          <div class="arch-header">
+            <div class="arch-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#788c5d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <div class="arch-title">Hands</div>
+          </div>
+          <div class="arch-sub">Sandboxes, MCP servers, tools. Uniform interface, regardless of what runs underneath.</div>
+          <div class="arch-api">
+            <code>execute(name, input) → string</code>
+            <code>provision({resources})</code>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="callout callout-blue">
+      Performance after the rebuild: p50 time to first token down 60 percent. p95 down over 90 percent. The recovery cliff disappeared.
+    </div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<!-- DIAGRAM 6 -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">07 / 11</div>
+    <div class="card-title">Outcomes is a second brain on the same bus</div>
+    <div class="card-sub">The grader does not share memory with the worker. It reads the same session, scores the output, and writes its decision back as an event.</div>
+    <div class="card-body">
+
+      <div class="twin-brain-row">
+        <div class="arch-node is-brain">
+          <div class="arch-header">
+            <div class="arch-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <div class="arch-title">Worker brain</div>
+          </div>
+          <div class="arch-sub">Does the task. Writes output to the session.</div>
+          <div class="arch-api">
+            <code>emitEvent(output)</code>
+          </div>
+        </div>
+
+        <div class="arch-node is-grader">
+          <div class="isolated-tag">Isolated Context</div>
+          <div class="arch-header">
+            <div class="arch-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#788c5d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div class="arch-title">Grader brain</div>
+          </div>
+          <div class="arch-sub">Reads rubric and output from session. Returns a decision event.</div>
+          <div class="arch-api">
+            <code>getEvents()</code>
+            <code>emitEvent(decision)</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connector" style="margin-top: 16px; margin-bottom: 14px;">
+        <span class="arch-connector-label">both attach to the same session</span>
+      </div>
+
+      <div class="session-bar">
+        <div class="session-bar-content">
+          <div>
+            <div class="session-bar-meta">Session</div>
+            <div class="session-bar-name">sesn_01HX...</div>
+          </div>
+          <div class="session-bar-events">
+            user.define_outcome → tool.call → tool.result → output.complete<br>
+            → outcome_evaluation_start → outcome_evaluation_end → satisfied
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="callout callout-orange">
+      The grader cannot see the worker's reasoning. Only the events the worker chose to write. That isolation is what makes the score honest.
+    </div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<!-- DIAGRAM 7 -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">08 / 11</div>
+    <div class="card-title">Four harness layers. Four SKUs.</div>
+    <div class="card-sub">What used to live in your code now ships as managed product. Each layer extracted on the same brain, hands, and session substrate.</div>
+    <div class="card-body">
+      <div class="layer-table">
+        <div class="layer-row layer-header">
+          <div class="layer-cell layer-name">Layer</div>
+          <div class="layer-cell layer-was">In your code</div>
+          <div class="layer-cell layer-is">As a SKU</div>
+          <div class="layer-cell layer-status">Status</div>
+        </div>
+        <div class="layer-row">
+          <div class="layer-cell layer-name">Verification</div>
+          <div class="layer-cell layer-was"><code>while not satisfied:</code></div>
+          <div class="layer-cell layer-is is-orange">Outcomes</div>
+          <div class="layer-cell layer-status">Public beta</div>
+        </div>
+        <div class="layer-row">
+          <div class="layer-cell layer-name">Memory curation</div>
+          <div class="layer-cell layer-was">Nightly cron + summarizer</div>
+          <div class="layer-cell layer-is is-blue">Dreams</div>
+          <div class="layer-cell layer-status">Research preview</div>
+        </div>
+        <div class="layer-row">
+          <div class="layer-cell layer-name">Orchestration</div>
+          <div class="layer-cell layer-was">asyncio + dispatch table</div>
+          <div class="layer-cell layer-is is-green">Multi-Agent</div>
+          <div class="layer-cell layer-status">Public beta</div>
+        </div>
+        <div class="layer-row">
+          <div class="layer-cell layer-name">Lifecycle hooks</div>
+          <div class="layer-cell layer-was">Polling + handlers</div>
+          <div class="layer-cell layer-is is-amber">Webhooks</div>
+          <div class="layer-cell layer-status">Public beta</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-blue">
+      All four ride on the same April 8 substrate. The decoupling shipped first. The layers shipped second.
+    </div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<!-- DIAGRAM 8 -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">09 / 11</div>
+    <div class="card-title">Harness as code, then as product line</div>
+    <div class="card-sub">Yesterday you owned the loop, the pipeline, the dispatcher, and the hooks. Today you compose them.</div>
+    <div class="card-body">
+      <div class="compare-grid">
+        <div class="compare-card is-old">
+          <div class="compare-header">
+            <span class="compare-tag is-old">Yesterday</span>
+            <span class="compare-title">Harness as code</span>
+          </div>
+          <ul class="harness-list">
+            <li><span class="harness-marker is-code"></span>your eval loop</li>
+            <li><span class="harness-marker is-code"></span>your memory pipeline</li>
+            <li><span class="harness-marker is-code"></span>your orchestrator</li>
+            <li><span class="harness-marker is-code"></span>your webhook handlers</li>
+          </ul>
+          <div class="compare-footer">All your code. All your maintenance. Every quarter, something upstream changes and you rewrite a piece.</div>
+        </div>
+        <div class="vs-divider">→</div>
+        <div class="compare-card is-new">
+          <div class="compare-header">
+            <span class="compare-tag is-new">Today</span>
+            <span class="compare-title">Harness as products</span>
+          </div>
+          <ul class="harness-list">
+            <li><span class="harness-marker is-orange"></span>Outcomes</li>
+            <li><span class="harness-marker is-blue"></span>Dreams</li>
+            <li><span class="harness-marker is-green"></span>Multi-Agent</li>
+            <li><span class="harness-marker is-amber"></span>Webhooks</li>
+          </ul>
+          <div class="compare-footer">Each layer is a separately purchased SKU on Anthropic's substrate. You compose them. You do not build them.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-orange">
+      The agent template is becoming the unit of distribution. The harness is becoming infrastructure underneath it.
+    </div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<!-- DIAGRAM 9 -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">10 / 11</div>
+    <div class="card-title">Where to start. The adoption ladder.</div>
+    <div class="card-sub">Ranked by leverage divided by commitment. Outcomes pays for itself first. Multi-Agent pays last.</div>
+    <div class="card-body">
+      <div class="ladder">
+        <div class="ladder-step is-orange">
+          <div class="ladder-rank">01</div>
+          <div class="ladder-content">
+            <div class="ladder-title">Outcomes first</div>
+            <div class="ladder-sub">Highest leverage. Lowest commitment.</div>
+            <div class="ladder-meta">
+              <span><strong>Effort</strong>One markdown rubric plus the API call.</span>
+              <span><strong>Rollback</strong>An afternoon.</span>
+              <span><strong>Cost</strong>$0.08 per runtime hour plus tokens.</span>
+            </div>
+          </div>
+        </div>
+        <div class="ladder-step is-blue">
+          <div class="ladder-rank">02</div>
+          <div class="ladder-content">
+            <div class="ladder-title">Dreams when memory rot is real</div>
+            <div class="ladder-sub">Do not adopt prophylactically. Wait for evidence.</div>
+            <div class="ladder-meta">
+              <span><strong>Trigger</strong>Your memory store is a known liability.</span>
+              <span><strong>Process</strong>Schedule a dream, audit the diff, then let it land.</span>
+              <span><strong>Note</strong>Research preview, separate access required.</span>
+            </div>
+          </div>
+        </div>
+        <div class="ladder-step is-green">
+          <div class="ladder-rank">03</div>
+          <div class="ladder-content">
+            <div class="ladder-title">Multi-Agent on greenfield only</div>
+            <div class="ladder-sub">Migrating an existing orchestrator is a rewrite.</div>
+            <div class="ladder-meta">
+              <span><strong>When</strong>Building a new agent system.</span>
+              <span><strong>Constraint</strong>Twenty parallel specialist ceiling.</span>
+              <span><strong>Skip if</strong>You already have a working orchestrator.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-green">
+      The maintenance burden you save pays for the constraints you accept. Pilot one workflow this week.
+    </div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<!-- DIAGRAM 10 -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">11 / 11</div>
+    <div class="card-title">What you keep. What Anthropic owns.</div>
+    <div class="card-sub">Manage exposure by keeping the things that encode your product. Let Anthropic carry the runtime.</div>
+    <div class="card-body">
+      <div class="ownership-grid">
+        <div class="ownership-card is-yours">
+          <div class="ownership-header">
+            <div class="ownership-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#788c5d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <div class="ownership-title">You keep</div>
+          </div>
+          <ul class="ownership-list">
+            <li>Rubrics</li>
+            <li>Agent templates</li>
+            <li>Tool definitions</li>
+            <li>Prompts</li>
+            <li>Business logic</li>
+          </ul>
+          <div class="ownership-footer">Everything that encodes <strong>what your product does.</strong> This is your moat. Keep it in your repo.</div>
+        </div>
+        <div class="ownership-card is-anthropic">
+          <div class="ownership-header">
+            <div class="ownership-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <div class="ownership-title">Anthropic runs</div>
+          </div>
+          <ul class="ownership-list">
+            <li>Eval loop and grader</li>
+            <li>Memory consolidation</li>
+            <li>Multi-agent orchestrator</li>
+            <li>Session log</li>
+            <li>Sandbox execution</li>
+            <li>Webhook delivery</li>
+            <li>Observability</li>
+          </ul>
+          <div class="ownership-footer">Everything that encodes <strong>how the harness runs.</strong> This is the runtime. The eval loop never was your moat.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-blue">
+      The interfaces are stable per Anthropic's design intent. But nothing is forever. Treat the harness as runtime, not source of truth.
+    </div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+</body>
+</html>
