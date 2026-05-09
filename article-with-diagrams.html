@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropic Shipped Outcomes. The Real Story Is Verification Becoming a SKU.</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ── Design tokens ── */
+:root {
+  --dark: #141413;
+  --light: #faf9f5;
+  --mid-gray: #b0aea5;
+  --light-gray: #e8e6dc;
+  --orange: #d97757;
+  --blue: #6a9bcc;
+  --green: #788c5d;
+  --dark-soft: #2d2d2a;
+  --dark-muted: #5c5b55;
+  --dark-faint: #8a8880;
+  --orange-soft: #faf0eb;
+  --orange-mid: #ecc4b3;
+  --blue-soft: #eef4f9;
+  --blue-mid: #b8d4e8;
+  --green-soft: #f0f3ec;
+  --green-mid: #c0ccae;
+  --warm-bg: #f2f1ed;
+  --border: #e0ded6;
+  --border-soft: #eae8e2;
+  --red: #b54a3a;
+  --red-soft: #f9efed;
+  --amber: #b8923e;
+  --amber-soft: #f9f3e6;
+  --amber-mid: #dfc88e;
+  --shadow-sm: 0 1px 3px rgba(20,20,19,0.04), 0 1px 2px rgba(20,20,19,0.03);
+  --shadow-md: 0 4px 14px rgba(20,20,19,0.06), 0 1px 4px rgba(20,20,19,0.03);
+  /* Vive: punchier accents */
+  --orange-deep: #c45a2e;
+  --blue-deep: #2f6fa6;
+  --green-deep: #5a7838;
+}
+
+/* ── Reset & base ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+  background: var(--warm-bg);
+  color: var(--dark);
+  font-weight: 300;
+  line-height: 1.7;
+  padding: 0;
+}
+
+/* ── Article layout ── */
+.article-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+/* ── Article typography ── */
+.article-header {
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 2px solid var(--border);
+}
+.article-title {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--dark);
+  margin-bottom: 16px;
+}
+.article-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--dark-faint);
+  letter-spacing: 0.3px;
+}
+.article-meta span { margin-right: 16px; }
+
+/* ── Section headings ── */
+.section-heading {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--dark);
+  margin: 56px 0 24px;
+  line-height: 1.25;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Body text ── */
+.prose {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--dark-soft);
+  margin-bottom: 24px;
+}
+.prose strong { font-weight: 600; color: var(--dark); }
+.prose em { font-style: italic; }
+
+/* ── Blockquote ── */
+.article-quote {
+  border-left: 3px solid var(--orange-deep);
+  padding: 16px 24px;
+  margin: 32px 0;
+  background: var(--orange-soft);
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--dark-soft);
+  line-height: 1.65;
+}
+
+/* ── CTA callout ── */
+.cta-box {
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 32px 0;
+  font-size: 15px;
+  color: var(--dark-muted);
+  line-height: 1.6;
+  box-shadow: var(--shadow-sm);
+}
+.cta-box strong { color: var(--dark); }
+
+/* ── Credits section ── */
+.credits {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 2px solid var(--border);
+}
+.credits h3 {
+  font-size: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--dark-faint);
+  margin: 28px 0 12px;
+}
+.credits h3:first-child { margin-top: 0; }
+.credits ul {
+  list-style: none;
+  padding: 0;
+}
+.credits li {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--dark-soft);
+  padding: 6px 0;
+  border-top: 1px solid var(--border-soft);
+  line-height: 1.55;
+}
+.credits li:first-child { border-top: none; }
+.credits li strong { font-weight: 500; color: var(--dark); }
+
+/* ── Closing note ── */
+.closing-note {
+  margin-top: 48px;
+  padding: 24px;
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--dark-muted);
+  font-weight: 400;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ══════════════════════════════════════════════
+   DIAGRAM CARD SYSTEM
+   ══════════════════════════════════════════════ */
+
+/* ── Shared card ── */
+.diagram-container {
+  max-width: 780px;
+  margin: 40px auto;
+  padding: 0;
+}
+.card {
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  padding: 40px 36px 28px;
+  position: relative;
+}
+.card-number {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid-gray);
+  letter-spacing: 0.5px;
+}
+.card-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+.card-sub {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--dark-muted);
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+.card-body { margin-bottom: 24px; }
+.callout {
+  border-radius: 6px;
+  padding: 11px 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: center;
+  margin-top: 20px;
+}
+.callout-blue { background: var(--blue-deep); color: #fff; border: 1px solid var(--blue-deep); }
+.callout-green { background: var(--green-deep); color: #fff; border: 1px solid var(--green-deep); }
+.callout-orange { background: var(--orange-deep); color: #fff; border: 1px solid var(--orange-deep); }
+.attribution {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--mid-gray);
+  text-align: right;
+  margin-top: 16px;
+  letter-spacing: 0.3px;
+}
+
+/* ── DIAGRAM 1: Loop flow ── */
+.loop-flow { display: flex; flex-direction: column; gap: 24px; position: relative; }
+.loop-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+  position: relative;
+}
+.loop-step {
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 14px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.loop-step.is-blue { border-width: 3px; border-color: var(--blue-deep); }
+.loop-step.is-orange { border-width: 3px; border-color: var(--orange-deep); }
+.loop-step.is-green { border-width: 3px; border-color: var(--green-deep); }
+.step-icon {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 10px;
+}
+.step-icon.is-blue { background: var(--blue-soft); border: 1px solid var(--blue-mid); }
+.step-icon.is-orange { background: var(--orange-soft); border: 1px solid var(--orange-mid); }
+.step-icon.is-green { background: var(--green-soft); border: 1px solid var(--green-mid); }
+.step-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.6px; text-transform: uppercase;
+  color: var(--dark-faint); margin-bottom: 4px;
+}
+.step-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px; font-weight: 600;
+  color: var(--dark); margin-bottom: 6px; line-height: 1.3;
+}
+.step-desc {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px; font-weight: 300;
+  color: var(--dark-muted); line-height: 1.45;
+}
+.isolated-tag {
+  position: absolute; top: -10px; right: 10px;
+  background: var(--green-soft); color: var(--green);
+  border: 1px solid var(--green-mid);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.6px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 100px;
+}
+.states-row {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center; padding: 16px;
+  background: var(--warm-bg);
+  border: 1px solid var(--border-soft); border-radius: 6px;
+}
+.state-pill {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  padding: 6px 12px; border-radius: 100px; letter-spacing: 0.3px;
+}
+.state-pill.is-success { background: var(--green-deep); color: #fff; border: 1px solid var(--green-deep); }
+.state-pill.is-revise { background: var(--orange-deep); color: #fff; border: 1px solid var(--orange-deep); }
+.state-pill.is-terminal { background: var(--light); color: var(--dark-muted); border: 1px solid var(--border); }
+.loop-feedback {
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  color: var(--orange); margin-top: -4px; gap: 8px;
+}
+.loop-feedback-line {
+  flex: 1; height: 1.5px; background: var(--orange-mid); position: relative;
+  transform-origin: left center; transform: scaleX(0);
+  transition: transform 0.8s ease 0.4s;
+}
+.card.in .loop-feedback-line { transform: scaleX(1); }
+.loop-feedback-line::before {
+  content: ''; position: absolute; left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 0; height: 0;
+  border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+  border-right: 6px solid var(--orange-mid);
+}
+
+/* ── DIAGRAM 2 & 3: Timeline ── */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before {
+  content: ''; position: absolute; left: 9px; top: 12px; bottom: 12px;
+  width: 1.5px; background: var(--light-gray);
+  transform-origin: top center; transform: scaleY(0);
+  transition: transform 0.9s ease 0.2s;
+}
+.card.in .timeline::before { transform: scaleY(1); }
+.timeline-event { position: relative; padding-bottom: 22px; }
+.timeline-event:last-child { padding-bottom: 0; }
+.timeline-dot {
+  position: absolute; left: -23px; top: 4px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--light); border: 2px solid var(--mid-gray); z-index: 1;
+}
+.timeline-event.is-start .timeline-dot { border-color: var(--blue); box-shadow: 0 0 0 4px var(--blue-soft); }
+.timeline-event.is-progress .timeline-dot { border-color: var(--orange); }
+.timeline-event.is-end .timeline-dot { border-color: var(--green); box-shadow: 0 0 0 4px var(--green-soft); }
+.timeline-event.is-terminal .timeline-dot { background: var(--dark); border-color: var(--dark); }
+.timeline-event.is-agent .timeline-dot { border-color: var(--orange); box-shadow: 0 0 0 4px var(--orange-soft); }
+.timeline-event.is-grader .timeline-dot { border-color: var(--green); }
+.timeline-event.is-grader-end .timeline-dot { border-color: var(--green); box-shadow: 0 0 0 4px var(--green-soft); }
+.timeline-event.is-revision .timeline-dot { border-color: var(--orange); background: var(--orange-soft); box-shadow: 0 0 0 4px var(--orange-soft); }
+.timeline-event.is-satisfied .timeline-dot { border-color: var(--green); background: var(--green-soft); box-shadow: 0 0 0 4px var(--green-soft); }
+.timeline-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px; font-weight: 500; color: var(--dark);
+  margin-bottom: 4px; word-break: break-all;
+}
+.timeline-desc {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px; font-weight: 300; color: var(--dark-muted); line-height: 1.5;
+}
+.timeline-meta {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.6px; text-transform: uppercase;
+  color: var(--dark-faint); margin-left: 10px;
+}
+.terminal-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 6px; margin-top: 8px;
+}
+.terminal-cell {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; font-weight: 500; text-align: center;
+  padding: 5px 4px; border-radius: 4px; border: 1px solid;
+}
+.terminal-cell.is-good { background: var(--green-deep); color: #fff; border-color: var(--green-deep); }
+.terminal-cell.is-revise { background: var(--orange-deep); color: #fff; border-color: var(--orange-deep); }
+.terminal-cell.is-bad { background: var(--light); border-color: var(--border); color: var(--dark-muted); }
+.iter-divider {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--dark-muted);
+  margin: 18px 0 14px -23px;
+  padding: 5px 12px;
+  background: var(--light);
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  display: inline-block; position: relative; z-index: 2;
+}
+
+/* ── DIAGRAM 4: Compare grid ── */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  gap: 16px; align-items: stretch;
+}
+.compare-card {
+  background: var(--light); border: 1px solid var(--border);
+  border-radius: 6px; padding: 18px 16px 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+}
+.compare-card.is-old { border-color: var(--border); }
+.compare-card.is-new { border-width: 3px; border-color: var(--orange-deep); }
+.compare-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.compare-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 100px;
+}
+.compare-tag.is-old { background: var(--warm-bg); color: var(--dark-faint); border: 1px solid var(--border); }
+.compare-tag.is-new { background: var(--orange-soft); color: var(--orange); border: 1px solid var(--orange-mid); }
+.compare-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px; font-weight: 600; color: var(--dark);
+}
+.code-stack {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 400; line-height: 1.55;
+  color: var(--dark-soft);
+  background: var(--warm-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px; padding: 12px 14px;
+  margin-bottom: 12px; white-space: pre; overflow-x: auto;
+}
+.code-stack .code-comment { color: var(--dark-faint); font-style: italic; }
+.code-stack .code-keyword { color: var(--orange); }
+.compare-footer {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px; font-weight: 300; color: var(--dark-muted);
+  line-height: 1.5; padding-top: 10px;
+  border-top: 1px dashed var(--border-soft); margin-top: auto;
+}
+.vs-divider {
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 500; color: var(--mid-gray);
+  letter-spacing: 1px; align-self: center; padding: 0 4px;
+}
+
+/* ── DIAGRAM 5: Spectrum cards ── */
+.spectrum-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.spectrum-card {
+  background: var(--light); border: 1px solid var(--border);
+  border-radius: 6px; padding: 18px 16px 14px;
+  box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
+}
+.spectrum-card.is-tier1 { border-color: var(--border); }
+.spectrum-card.is-tier2 { border-width: 3px; border-color: var(--blue-deep); }
+.spectrum-card.is-tier3 { border-width: 3px; border-color: var(--orange-deep); }
+.spectrum-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--dark-faint); margin-bottom: 6px;
+}
+.spectrum-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px; font-weight: 600; color: var(--dark);
+  margin-bottom: 4px; line-height: 1.3;
+}
+.spectrum-sub {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px; font-weight: 300; color: var(--dark-muted);
+  line-height: 1.45; margin-bottom: 14px;
+}
+.spectrum-list { list-style: none; padding: 0; margin: 0 0 14px 0; }
+.spectrum-list li {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px; font-weight: 300; color: var(--dark-soft);
+  padding: 8px 0; border-top: 1px solid var(--border-soft); line-height: 1.45;
+}
+.spectrum-list li:first-child { border-top: none; padding-top: 4px; }
+.spectrum-list li .list-label {
+  font-weight: 500; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.6px; text-transform: uppercase;
+  display: block; margin-bottom: 3px; color: var(--dark-faint);
+}
+.spectrum-footer {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.6px; text-transform: uppercase;
+  text-align: center; padding: 7px 8px;
+  border-radius: 4px; margin-top: auto;
+}
+.spectrum-footer.is-burden { background: var(--warm-bg); color: var(--dark-faint); border: 1px solid var(--border); }
+.spectrum-footer.is-shared { background: var(--blue-soft); color: var(--blue); border: 1px solid var(--blue-mid); }
+.spectrum-footer.is-light { background: var(--orange-soft); color: var(--orange); border: 1px solid var(--orange-mid); }
+
+/* ── DIAGRAM 6 & 7: Architecture stack ── */
+.arch-stack { display: flex; flex-direction: column; gap: 14px; }
+.arch-node {
+  background: var(--light); border: 1.5px solid var(--border);
+  border-radius: 6px; padding: 16px 18px;
+  box-shadow: var(--shadow-sm); position: relative;
+}
+.arch-node.is-brain { border-width: 3px; border-color: var(--orange-deep); background: var(--orange-soft); }
+.arch-node.is-session { border-width: 3px; border-color: var(--blue-deep); background: var(--blue-soft); }
+.arch-node.is-hands, .arch-node.is-grader { border-width: 3px; border-color: var(--green-deep); background: var(--green-soft); }
+.arch-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.arch-icon {
+  width: 28px; height: 28px; border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--light); border: 1px solid var(--border); flex-shrink: 0;
+}
+.arch-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px; font-weight: 700; color: var(--dark); letter-spacing: -0.1px;
+}
+.arch-sub {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px; font-weight: 400; color: var(--dark-muted);
+  margin-bottom: 10px; line-height: 1.45;
+}
+.arch-api { display: flex; flex-wrap: wrap; gap: 6px; }
+.arch-api code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  background: var(--light); border: 1px solid var(--border);
+  border-radius: 4px; padding: 3px 8px; color: var(--dark-soft);
+}
+.arch-connector {
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.4px;
+  color: var(--dark-faint); text-transform: uppercase;
+  position: relative; padding: 4px 0;
+}
+.arch-connector::before, .arch-connector::after {
+  content: ''; position: absolute; left: 50%;
+  width: 1.5px; background: var(--light-gray);
+  transform: translateX(-50%);
+}
+.arch-connector::before { top: -10px; height: 8px; }
+.arch-connector::after { bottom: -10px; height: 8px; }
+.arch-connector-label {
+  background: var(--warm-bg); padding: 3px 10px;
+  border: 1px solid var(--border-soft); border-radius: 100px; z-index: 1;
+}
+.twin-brain-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.session-bar {
+  background: var(--blue-soft); border: 1.5px solid var(--blue-mid);
+  border-radius: 6px; padding: 14px 18px; position: relative;
+}
+.session-bar-content {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.session-bar-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; font-weight: 500; color: var(--blue);
+  letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 2px;
+}
+.session-bar-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px; font-weight: 600; color: var(--dark);
+}
+.session-bar-events {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; font-weight: 400; color: var(--dark-faint);
+  line-height: 1.55; text-align: right; flex: 1;
+}
+
+/* ── DIAGRAM 8: Layer table ── */
+.layer-table {
+  display: flex; flex-direction: column; gap: 1px;
+  background: var(--border-soft);
+  border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+}
+.layer-row {
+  display: grid; grid-template-columns: 1.3fr 1.5fr 1.2fr 1fr;
+  gap: 1px; background: var(--border-soft);
+}
+.layer-cell {
+  background: var(--light); padding: 12px 14px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px; font-weight: 400; color: var(--dark-soft);
+  display: flex; align-items: center;
+}
+.layer-row.layer-header .layer-cell {
+  background: var(--warm-bg);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.6px; text-transform: uppercase;
+  color: var(--dark-faint); padding: 10px 14px;
+}
+.layer-cell.layer-name { font-weight: 600; color: var(--dark); }
+.layer-cell.layer-was code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; background: var(--warm-bg);
+  border: 1px solid var(--border-soft);
+  padding: 2px 6px; border-radius: 4px; color: var(--dark-soft);
+}
+.layer-cell.layer-is {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px; font-weight: 600;
+}
+.layer-cell.layer-is.is-orange { color: var(--orange-deep); }
+.layer-cell.layer-is.is-blue { color: var(--blue-deep); }
+.layer-cell.layer-is.is-green { color: var(--green-deep); }
+.layer-cell.layer-is.is-amber { color: var(--amber); }
+.layer-cell.layer-status {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--dark-muted); letter-spacing: 0.3px;
+}
+
+/* ── DIAGRAM 9: Harness lists ── */
+.harness-list { list-style: none; padding: 0; margin: 0 0 14px 0; }
+.harness-list li {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px; font-weight: 400; color: var(--dark);
+  padding: 8px 0; border-top: 1px solid var(--border-soft);
+}
+.harness-list li:first-child { border-top: none; padding-top: 0; }
+.harness-marker { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.harness-marker.is-code { background: var(--mid-gray); }
+.harness-marker.is-orange { background: var(--orange); }
+.harness-marker.is-blue { background: var(--blue); }
+.harness-marker.is-green { background: var(--green); }
+.harness-marker.is-amber { background: var(--amber); }
+
+/* ── DIAGRAM 10: Adoption ladder ── */
+.ladder { display: flex; flex-direction: column; gap: 10px; }
+.ladder-step {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 16px; background: var(--light);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 16px 18px; box-shadow: var(--shadow-sm); align-items: start;
+}
+.ladder-step.is-orange { border-left: 6px solid var(--orange-deep); }
+.ladder-step.is-blue { border-left: 6px solid var(--blue-deep); }
+.ladder-step.is-green { border-left: 6px solid var(--green-deep); }
+.ladder-rank {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22px; font-weight: 600; color: var(--dark-faint); min-width: 32px;
+}
+.ladder-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px; font-weight: 700; color: var(--dark);
+  margin-bottom: 4px; line-height: 1.3;
+}
+.ladder-sub {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px; font-weight: 400; color: var(--dark-muted);
+  margin-bottom: 10px; line-height: 1.45;
+}
+.ladder-meta { display: flex; flex-direction: column; gap: 4px; }
+.ladder-meta span {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px; font-weight: 300; color: var(--dark-soft); line-height: 1.5;
+}
+.ladder-meta strong {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500; color: var(--dark-faint);
+  font-size: 10px; letter-spacing: 0.4px; text-transform: uppercase; margin-right: 6px;
+}
+
+/* ── DIAGRAM 11: Ownership grid ── */
+.ownership-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.ownership-card {
+  background: var(--light); border: 1.5px solid var(--border);
+  border-radius: 6px; padding: 18px 16px; box-shadow: var(--shadow-sm);
+}
+.ownership-card.is-yours { border-width: 3px; border-color: var(--green-deep); background: var(--green-soft); }
+.ownership-card.is-anthropic { border-width: 3px; border-color: var(--orange-deep); background: var(--orange-soft); }
+.ownership-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 12px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.ownership-icon {
+  width: 28px; height: 28px; border-radius: 5px;
+  background: var(--light); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ownership-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px; font-weight: 700; color: var(--dark);
+}
+.ownership-list { list-style: none; padding: 0; margin: 0 0 12px 0; }
+.ownership-list li {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 400; color: var(--dark-soft);
+  padding: 5px 0; border-top: 1px solid var(--border-soft);
+}
+.ownership-list li:first-child { border-top: none; padding-top: 0; }
+.ownership-footer {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px; font-weight: 300; color: var(--dark-muted);
+  line-height: 1.5; padding-top: 10px;
+  border-top: 1px dashed var(--border-soft);
+}
+.ownership-footer strong { font-weight: 500; color: var(--dark); }
+
+/* ── Scroll-reveal animation ── */
+.card .timeline-event, .card .loop-step, .card .compare-card,
+.card .spectrum-card, .card .arch-node, .card .ladder-step,
+.card .ownership-card, .card .layer-row:not(.layer-header),
+.card .state-pill, .card .terminal-cell, .card .session-bar,
+.card .arch-connector, .card .iter-divider, .card .states-row, .card .callout {
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 0.55s cubic-bezier(0.2,0.8,0.2,1), transform 0.55s cubic-bezier(0.2,0.8,0.2,1);
+}
+.card.in .timeline-event, .card.in .loop-step, .card.in .compare-card,
+.card.in .spectrum-card, .card.in .arch-node, .card.in .ladder-step,
+.card.in .ownership-card, .card.in .layer-row, .card.in .state-pill,
+.card.in .terminal-cell, .card.in .session-bar, .card.in .arch-connector,
+.card.in .iter-divider, .card.in .states-row, .card.in .callout {
+  opacity: 1; transform: none;
+}
+
+@media print {
+  .card *, .timeline::before, .loop-feedback-line {
+    opacity: 1 !important; transform: none !important; transition: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card *, .timeline::before, .loop-feedback-line {
+    opacity: 1 !important; transform: none !important; transition: none !important;
+  }
+}
+
+/* ── Mobile responsive ── */
+@media (max-width: 600px) {
+  .article-title { font-size: 26px; }
+  .section-heading { font-size: 22px; }
+  .prose { font-size: 16px; }
+  .card { padding: 28px 20px 22px; }
+  .card-title { font-size: 18px; }
+  .card-sub { font-size: 14px; margin-bottom: 22px; }
+  .loop-row { grid-template-columns: 1fr; gap: 12px; }
+  .terminal-grid { grid-template-columns: repeat(2, 1fr); }
+  .step-title { font-size: 14px; }
+  .step-desc { font-size: 12px; }
+  .compare-grid { grid-template-columns: 1fr; gap: 12px; }
+  .vs-divider { padding: 4px 0; }
+  .spectrum-grid { grid-template-columns: 1fr; gap: 12px; }
+  .twin-brain-row { grid-template-columns: 1fr; }
+  .session-bar-content { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .session-bar-events { text-align: left; }
+  .layer-table { gap: 8px; background: transparent; border: none; }
+  .layer-row {
+    grid-template-columns: 1fr 1fr;
+    background: var(--light); border: 1px solid var(--border);
+    border-radius: 6px; padding: 4px; gap: 1px;
+  }
+  .layer-row.layer-header { display: none; }
+  .layer-cell { padding: 6px 8px; font-size: 11px; }
+  .layer-cell.layer-name {
+    grid-column: 1 / -1; font-size: 13px;
+    border-bottom: 1px solid var(--border-soft); padding: 8px;
+  }
+  .ladder-step { grid-template-columns: 1fr; gap: 8px; padding: 14px 16px; }
+  .ladder-rank { font-size: 18px; }
+  .ownership-grid { grid-template-columns: 1fr; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     ARTICLE START
+     ══════════════════════════════════════════════ -->
+
+<div class="article-container">
+
+  <!-- Header -->
+  <div class="article-header">
+    <h1 class="article-title">Anthropic Shipped Outcomes. The Real Story Is Verification Becoming a SKU.</h1>
+    <div class="article-meta">
+      <span>~3,500 words</span>
+      <span>~14 min read</span>
+      <span>11 diagrams</span>
+      <span>Han HELOIR YAN</span>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <p class="prose">You have written this loop before. Eighteen months ago, when you first put a Claude agent into production, you wrote a rubric. You wrote a grader. You wrote retry logic for when the grader said no. The pieces broke. You patched them. The rubric drifted. You rewrote it.</p>
+
+  <p class="prose">On May 6 at Code with Claude San Francisco, Anthropic shipped your loop as an API endpoint and called it <strong>Outcomes</strong>.</p>
+
+  <p class="prose">That is the news. The story underneath it is bigger. Outcomes is the first harness layer Anthropic decided to sell. Dreams, Multi-Agent, and Webhooks are the same move on memory, orchestration, and lifecycle. The harness used to be code you wrote. It is becoming a stack of products you compose.</p>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <strong>Before We Start!</strong> If this helps you ship better AI systems: clap 50 times (yes, you can!). Medium's algorithm favors this, increasing visibility to others who then discover the article. Follow me on Medium, LinkedIn and subscribe to get my latest article.
+  </div>
+
+  <!-- ═══ SECTION 1 ═══ -->
+  <h2 class="section-heading">What Outcomes Actually Is</h2>
+
+  <p class="prose">Anthropic shipped four things into Managed Agents on May 6. Three are public beta: Outcomes, Multi-Agent Orchestration, and Webhooks. One is research preview: Dreams. There was no new model that day. Dario Amodei opened the keynote with the line directly: "No new model today. Today is about how we are making our products work better for you."</p>
+
+  <p class="prose">The press picked the marquee feature, which was Dreams. Agents that consolidate memory between sessions, named to evoke human sleep, with a six-fold completion-rate improvement at Harvey to anchor the demo. It got the headlines. It deserved them. But the architecturally significant feature in the same release is Outcomes, and on the surface it does not look like much. You write a rubric. The agent works. A grader scores the work. If it falls short, the agent tries again.</p>
+
+  <p class="prose">Five hundred lines of code for any team that has shipped a serious agent. Four lines of API for everyone using Managed Agents.</p>
+
+</div>
+
+<!-- ═══ DIAGRAM 1 ═══ -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">01 / 11</div>
+    <div class="card-title">Outcomes is a loop, not a feature</div>
+    <div class="card-sub">Rubric defines done. A separate Claude in its own context window decides done. The agent revises until done.</div>
+    <div class="card-body">
+      <div class="loop-flow">
+        <div class="loop-row">
+          <div class="loop-step is-blue">
+            <div class="step-icon is-blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6a9bcc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <div class="step-label">Step 1</div>
+            <div class="step-title">Rubric</div>
+            <div class="step-desc">Markdown describing what success looks like for this task.</div>
+          </div>
+          <div class="loop-step is-orange">
+            <div class="step-icon is-orange">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div class="step-label">Step 2</div>
+            <div class="step-title">Agent</div>
+            <div class="step-desc">Claude works on the task. Reads, runs tools, produces output.</div>
+          </div>
+          <div class="loop-step is-green">
+            <div class="isolated-tag">Isolated Context</div>
+            <div class="step-icon is-green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#788c5d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="step-label">Step 3</div>
+            <div class="step-title">Grader</div>
+            <div class="step-desc">Separate Claude reads rubric and output only. Returns one of five states.</div>
+          </div>
+        </div>
+        <div class="states-row">
+          <span class="state-pill is-success">satisfied</span>
+          <span class="state-pill is-revise">needs_revision</span>
+          <span class="state-pill is-terminal">max_iterations_reached</span>
+          <span class="state-pill is-terminal">failed</span>
+          <span class="state-pill is-terminal">interrupted</span>
+        </div>
+        <div class="loop-feedback">
+          <span>needs_revision sends feedback back to the agent</span>
+          <div class="loop-feedback-line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-green">The grader runs in its own context window. It cannot see the agent's reasoning, only the output.</div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<div class="article-container">
+  <p class="prose">The rubric is a markdown document. You describe what success looks like. The agent does the work. When the agent thinks it is done, a separate Claude instance receives the output, reads your rubric, and returns one of five terminal states.</p>
+
+  <p class="prose">The five states are: <strong>satisfied</strong> (ship it), <strong>needs_revision</strong> (here is what to change, take another pass), <strong>max_iterations_reached</strong> (you ran out of attempts), <strong>failed</strong> (the grader could not evaluate), and <strong>interrupted</strong> (something killed the run).</p>
+
+  <p class="prose">The piece worth pausing on is the separation. The grader runs in its own context window. It does not see the agent's reasoning. It does not see the chain of tool calls the agent took to produce the output. It only reads the rubric and the output. This is deliberate. If the grader could see the agent's chain of thought, it would be biased toward saying yes. The agent's reasoning is persuasive. The output, on its own, often is not. Evaluation accuracy depends on isolation. So Anthropic isolates.</p>
+
+  <p class="prose">The loop runs up to three times by default. Maximum is twenty. You can write the rubric to relax or tighten on each pass. Outcomes is public beta as of May 6, behind the beta header <strong>managed-agents-2026-04-01</strong>. No separate access request, unlike Dreams.</p>
+</div>
+
+<!-- ═══ DIAGRAM 2 ═══ -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">02 / 11</div>
+    <div class="card-title">The outcome lifecycle, as events</div>
+    <div class="card-sub">Five events fire from definition to terminal state. Subscribe to any of them via webhooks.</div>
+    <div class="card-body">
+      <div class="timeline">
+        <div class="timeline-event is-start"><div class="timeline-dot"></div><div class="timeline-label">user.define_outcome <span class="timeline-meta">user event</span></div><div class="timeline-desc">You attach a rubric to a session. The outcome is now active and will gate the agent's work.</div></div>
+        <div class="timeline-event is-progress"><div class="timeline-dot"></div><div class="timeline-label">span.outcome_evaluation_start <span class="timeline-meta">grader event</span></div><div class="timeline-desc">Agent has produced output. The grader spins up in its own context window and begins reading the rubric.</div></div>
+        <div class="timeline-event is-progress"><div class="timeline-dot"></div><div class="timeline-label">span.outcome_evaluation_ongoing <span class="timeline-meta">grader event</span></div><div class="timeline-desc">Grader is mid evaluation. Useful for surfacing live status in the Claude Console.</div></div>
+        <div class="timeline-event is-end"><div class="timeline-dot"></div><div class="timeline-label">span.outcome_evaluation_end <span class="timeline-meta">grader event</span></div><div class="timeline-desc">Grader returns its decision. The session moves into one of five terminal states.</div>
+          <div class="terminal-grid">
+            <div class="terminal-cell is-good">satisfied</div>
+            <div class="terminal-cell is-revise">needs_revision</div>
+            <div class="terminal-cell is-bad">max_iter</div>
+            <div class="terminal-cell is-bad">failed</div>
+            <div class="terminal-cell is-bad">interrupted</div>
+          </div>
+        </div>
+        <div class="timeline-event is-terminal"><div class="timeline-dot"></div><div class="timeline-label">webhook fires <span class="timeline-meta">external</span></div><div class="timeline-desc">Your endpoint receives notification. The agent run is finished. No polling required.</div></div>
+      </div>
+    </div>
+    <div class="callout callout-blue">Default loop runs up to 3 iterations. Maximum is 20. Beta header: managed-agents-2026-04-01.</div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<div class="article-container">
+  <p class="prose">That is the abstract view. In practice a real outcome run emits more events than five, including the agent's working messages and a fresh grader span on each iteration. The two-iteration version looks like this:</p>
+</div>
+
+<!-- ═══ DIAGRAM 3 ═══ -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">03 / 11</div>
+    <div class="card-title">The full lifecycle, with iterations</div>
+    <div class="card-sub">Real events from a real run. Three actors emit them: you, the agent, the grader. The loop continues until the grader returns satisfied or the iteration cap is hit.</div>
+    <div class="card-body">
+      <div class="timeline">
+        <div class="timeline-event is-start"><div class="timeline-dot"></div><div class="timeline-label">user.define_outcome <span class="timeline-meta">user</span></div><div class="timeline-desc">You attach a rubric to the session. The agent starts working immediately on receipt. No additional message event needed.</div></div>
+        <div class="iter-divider">Iteration 0</div>
+        <div class="timeline-event is-agent"><div class="timeline-dot"></div><div class="timeline-label">agent.message &middot; agent.tool_use <span class="timeline-meta">agent</span></div><div class="timeline-desc">Agent plans, reads files, runs scripts, produces a first draft of the deliverable.</div></div>
+        <div class="timeline-event is-grader"><div class="timeline-dot"></div><div class="timeline-label">span.outcome_evaluation_start <span class="timeline-meta">grader &middot; iter 0</span></div><div class="timeline-desc">Grader spins up in its own context window. Reads rubric and the agent's output. Cannot see the agent's reasoning.</div></div>
+        <div class="timeline-event is-grader"><div class="timeline-dot"></div><div class="timeline-label">span.outcome_evaluation_ongoing <span class="timeline-meta">heartbeat</span></div><div class="timeline-desc">Periodic heartbeat while the grader evaluates. Grader's internal reasoning is opaque.</div></div>
+        <div class="timeline-event is-revision"><div class="timeline-dot"></div><div class="timeline-label">span.outcome_evaluation_end <span class="timeline-meta">result: needs_revision</span></div><div class="timeline-desc">Grader returns per-criterion feedback: which checks pass, which fail, what to change. Agent reads the explanation and starts a new iteration.</div></div>
+        <div class="iter-divider">Iteration 1</div>
+        <div class="timeline-event is-agent"><div class="timeline-dot"></div><div class="timeline-label">agent.message &middot; agent.tool_use <span class="timeline-meta">agent</span></div><div class="timeline-desc">Agent revises in response to the specific gaps the grader identified. Edits files, reruns scripts, updates the deliverable.</div></div>
+        <div class="timeline-event is-grader"><div class="timeline-dot"></div><div class="timeline-label">span.outcome_evaluation_start <span class="timeline-meta">grader &middot; iter 1</span></div><div class="timeline-desc">Fresh grader instance. Re-evaluates the new output against the same rubric. The score does not drift across iterations because the grader has no memory of the previous run.</div></div>
+        <div class="timeline-event is-satisfied"><div class="timeline-dot"></div><div class="timeline-label">span.outcome_evaluation_end <span class="timeline-meta">result: satisfied</span></div><div class="timeline-desc">All criteria met. Grader returns explanation listing which checks passed.</div></div>
+        <div class="timeline-event is-terminal"><div class="timeline-dot"></div><div class="timeline-label">session.idle <span class="timeline-meta">deliverables ready</span></div><div class="timeline-desc">Files are in /mnt/session/outputs/ on the agent's container. Pull them via the Files API scoped to the session.</div></div>
+      </div>
+    </div>
+    <div class="callout callout-orange">Default cap is 3 iterations. Maximum is 20. The session retains history across iterations so the agent reads prior feedback, but each grader is fresh.</div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<div class="article-container">
+  <p class="prose">Anthropic released two sets of numbers. Internal benchmarks first: Outcomes improves task success by <strong>ten percentage points</strong> compared with standard prompting. The gain is largest on hard problems, the kind where a single pass through Claude is going to miss something subtle. On structured file generation specifically, success rises 8.4 percent on docx output and 10.1 percent on pptx. These are workloads where attention to detail matters most: rubric criteria can encode formatting rules a generic prompt would miss.</p>
+
+  <p class="prose">Customer numbers second. Wisedocs uses Outcomes to review documents against internal guidelines. Reviews now run <strong>50 percent faster</strong> while staying aligned to team standards. The 50 percent is not faster Claude. It is the absence of the brittle harness Wisedocs would otherwise be maintaining. Spiral by Every uses Outcomes alongside Multi-Agent: a lead agent receives a writing request, sub-agents generate parallel drafts, and Outcomes scores each draft against editorial principles and the user's voice. The agent ships whichever draft scored highest. Spiral is delivering this through API and CLI, productized.</p>
+
+  <p class="prose">None of this looks like a new technique. The evaluator and the worker are the same pattern every team running production agents has been writing by hand for two years. That is the point. Outcomes is the codification of a practice. The interesting question is not what it does. It is why Anthropic decided to ship the practice as an API endpoint now.</p>
+
+  <!-- ═══ SECTION 2 ═══ -->
+  <h2 class="section-heading">The Pattern That Was Sitting in Anthropic's Own Engineering Blog</h2>
+
+  <p class="prose">The pattern is not new. Outcomes is the codification of work Anthropic published seventeen months ago.</p>
+
+  <p class="prose">In December 2024, Erik Schluntz and Barry Zhang at Anthropic published "Building Effective Agents." The post describes five workflow patterns for building agents: prompt chaining, routing, parallelization, orchestrator-subagents, and one called the evaluator-optimizer. The description is one sentence:</p>
+
+  <div class="article-quote">"In the evaluator-optimizer workflow, one LLM call generates a response while another provides evaluation and feedback in a loop."</div>
+
+  <p class="prose">Read that sentence twice. Then read the Outcomes documentation. It is the same architecture. One Claude generates the output. A second Claude evaluates the output against criteria and provides structured feedback. The loop continues until the evaluator is satisfied or maximum iterations are reached. Anthropic published the pattern. Anthropic published a Jupyter notebook reference implementation in their cookbook. The Spring AI team turned it into a class called EvaluatorOptimizerWorkflow. The Hatchet team turned it into a workflow primitive in Icepick. CrewAI, LangGraph, and DSPy all support some variation. The pattern has been in production for seventeen months across thousands of teams.</p>
+</div>
+
+<!-- ═══ DIAGRAM 4 ═══ -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">04 / 11</div>
+    <div class="card-title">Same pattern. Different decade.</div>
+    <div class="card-sub">Anthropic published the evaluator-optimizer workflow in December 2024. They sold it as a managed feature in May 2026.</div>
+    <div class="card-body">
+      <div class="compare-grid">
+        <div class="compare-card is-old">
+          <div class="compare-header"><span class="compare-tag is-old">2024</span><span class="compare-title">You build it</span></div>
+<pre class="code-stack"><span class="code-comment"># your loop, in your code</span>
+<span class="code-keyword">while</span> not satisfied:
+    output = agent(task)
+    score = evaluator(
+        rubric, output)
+    <span class="code-keyword">if</span> score.passed:
+        <span class="code-keyword">break</span>
+    <span class="code-keyword">if</span> attempts &gt; MAX:
+        <span class="code-keyword">raise</span>
+    feedback = score.notes</pre>
+          <div class="compare-footer">You own the rubric, the eval prompt, the retry logic, the error handling, the observability, the deployment, and the version compatibility when the model gets smarter.</div>
+        </div>
+        <div class="vs-divider">vs</div>
+        <div class="compare-card is-new">
+          <div class="compare-header"><span class="compare-tag is-new">2026</span><span class="compare-title">Anthropic ships it</span></div>
+<pre class="code-stack"><span class="code-comment"># the actual API call</span>
+client.beta.sessions.events.send(
+  session_id=sid,
+  events=[{
+    "type": "user.define_outcome",
+    "rubric": {
+      "type": "text",
+      "content": RUBRIC},
+    "max_iterations": 3,
+  }],
+)</pre>
+          <div class="compare-footer">You own the rubric. Anthropic owns the grader, the loop, the retry, the iteration budget, the observability, and the model upgrade path. Billed at $0.08 per runtime hour plus token rates.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-orange">The pattern is not the hard part. The maintenance was. That is what Anthropic decided to sell.</div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<div class="article-container">
+  <p class="prose">If you have rolled your own, the recipe is familiar. You define a rubric in code or as a prompt template. You wrap the agent's main task in a function that returns its output. You write a second prompt that takes the output and the rubric, asks an evaluator instance to score it, and returns either an approval or specific feedback. You wrap the pair in a loop with a counter so the system does not spin forever. You add error handling for when the evaluator's structured output drifts. You add observability so you can see why the loop did not converge in production. You ship it. Six months later you rewrite it because the model got smarter and your prompts no longer hold up. Twelve months later you rewrite it because someone on your team decided to use Pydantic instead of JSON schemas. The pattern is not the hard part. The pattern is fine. The maintenance is the hard part.</p>
+
+  <p class="prose">Frameworks help, but they make a different trade. CrewAI gives you the loop but couples you to the framework's worldview. LangGraph gives you a graph runtime but you still write the rubric and own the eval prompts. Each framework promises portability and ships lock-in by another name. None of them give you what Outcomes gives you: a Claude grader running on Anthropic's infrastructure, isolated by default, with managed iteration limits and standard event tracing, where the only thing you write is the markdown rubric.</p>
+</div>
+
+<!-- ═══ DIAGRAM 5 ═══ -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">05 / 11</div>
+    <div class="card-title">Three places the eval loop can live</div>
+    <div class="card-sub">From "you maintain everything" to "you write a markdown file." The trade is control versus burden.</div>
+    <div class="card-body">
+      <div class="spectrum-grid">
+        <div class="spectrum-card is-tier1">
+          <div class="spectrum-num">Path 1</div>
+          <div class="spectrum-title">Hand rolled</div>
+          <div class="spectrum-sub">Pure Python. While loop, two prompts, retry counter.</div>
+          <ul class="spectrum-list">
+            <li><span class="list-label">You own</span>Rubric, eval prompt, loop, retry, errors, observability, deployment.</li>
+            <li><span class="list-label">Cost</span>Weeks to build. Ongoing maintenance. Rewrites every model upgrade.</li>
+            <li><span class="list-label">Locks you to</span>Nothing. Full portability.</li>
+          </ul>
+          <div class="spectrum-footer is-burden">Full burden</div>
+        </div>
+        <div class="spectrum-card is-tier2">
+          <div class="spectrum-num">Path 2</div>
+          <div class="spectrum-title">Framework</div>
+          <div class="spectrum-sub">CrewAI, LangGraph, DSPy. The loop is provided.</div>
+          <ul class="spectrum-list">
+            <li><span class="list-label">You own</span>Rubric, eval prompt, framework expertise.</li>
+            <li><span class="list-label">Cost</span>Framework upgrade compatibility. Version drift. Abstraction leaks.</li>
+            <li><span class="list-label">Locks you to</span>The framework's worldview.</li>
+          </ul>
+          <div class="spectrum-footer is-shared">Shared burden</div>
+        </div>
+        <div class="spectrum-card is-tier3">
+          <div class="spectrum-num">Path 3</div>
+          <div class="spectrum-title">Managed (Outcomes)</div>
+          <div class="spectrum-sub">Markdown rubric. Anthropic runs the loop on your session.</div>
+          <ul class="spectrum-list">
+            <li><span class="list-label">You own</span>The rubric.</li>
+            <li><span class="list-label">Cost</span>$0.08 per runtime hour plus standard token rates.</li>
+            <li><span class="list-label">Locks you to</span>Claude only. No multi model migration path.</li>
+          </ul>
+          <div class="spectrum-footer is-light">Minimal burden</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-blue">The same loop runs in all three. What changes is who maintains it the day the next model ships.</div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<div class="article-container">
+  <p class="prose">So the technical question is uninteresting. Anthropic is selling a pattern they themselves wrote about seventeen months ago. The question that matters is structural: why is the evaluator-optimizer the first pattern to graduate from blog post to SKU? Why not prompt chaining? Why not routing? Why is verification the layer Anthropic decided to capture as managed product first?</p>
+
+  <p class="prose">The answer is not in the Outcomes documentation. The answer is in a different Anthropic engineering post, published one month before Code with Claude, that almost no one read.</p>
+
+  <!-- ═══ SECTION 3 ═══ -->
+  <h2 class="section-heading">Why Outcomes Could Ship: Brain, Hands, Session</h2>
+
+  <p class="prose">The May 6 announcements were not a roadmap. They were a tax on architecture work Anthropic finished in April.</p>
+
+  <p class="prose">On April 8, Anthropic published an engineering post titled "Scaling Managed Agents: Decoupling the brain from the hands." Almost no one outside Anthropic linked to it. The post does not announce a feature. It announces a rebuild. And it is the only document that explains why Outcomes, Dreams, Multi-Agent, and Webhooks all shipped in the same release one month later.</p>
+
+  <p class="prose">The post describes how Managed Agents was rebuilt around three primitives.</p>
+
+  <p class="prose">The first is the <strong>session</strong>. An event log that only appends. You read it via getEvents(). The harness writes to it via emitEvent(). Tool calls, tool results, model responses, user messages, configuration changes, all of it goes through the session. The session is durable. If a process crashes during a task, the session does not. You can recover state by replaying events.</p>
+
+  <p class="prose">The second is the <strong>brain</strong>. Claude itself plus the harness loop that calls Claude and routes Claude's tool calls. The brain is intentionally stateless from the harness perspective. Recovery is wake(sessionId): spin up a new brain, hand it the session, let it pick up where the last brain left off. The brain knows nothing the session does not record.</p>
+
+  <p class="prose">The third is the <strong>hands</strong>. The sandboxes, MCP servers, and tools where code actually executes. Hands look uniform from the brain's perspective: execute(name, input) &rarr; string. Whether the underlying tool is a code interpreter, a browser, a filesystem operation, or an MCP connected SaaS, the brain calls the same interface and the hand returns the same shape. Provisioning works through provision({resources}), which spawns containers on demand.</p>
+</div>
+
+<!-- ═══ DIAGRAM 6 ═══ -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">06 / 11</div>
+    <div class="card-title">Three primitives. One bus.</div>
+    <div class="card-sub">Anthropic's April 8 rebuild separated the agent into brain, hands, and session. Everything they shipped on May 6 depends on this.</div>
+    <div class="card-body">
+      <div class="arch-stack">
+        <div class="arch-node is-brain">
+          <div class="arch-header"><div class="arch-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="arch-title">Brain</div></div>
+          <div class="arch-sub">Claude plus the harness loop. Stateless from the harness perspective. Recoverable on crash.</div>
+          <div class="arch-api"><code>wake(sessionId)</code></div>
+        </div>
+        <div class="arch-connector"><span class="arch-connector-label">emitEvent &middot; getEvents</span></div>
+        <div class="arch-node is-session">
+          <div class="arch-header"><div class="arch-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6a9bcc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div><div class="arch-title">Session</div></div>
+          <div class="arch-sub">Append only event log. Durable. Queryable. The substrate that survives every crash.</div>
+          <div class="arch-api"><code>emitEvent(event)</code> <code>getEvents()</code></div>
+        </div>
+        <div class="arch-connector"><span class="arch-connector-label">execute &middot; provision</span></div>
+        <div class="arch-node is-hands">
+          <div class="arch-header"><div class="arch-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#788c5d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="arch-title">Hands</div></div>
+          <div class="arch-sub">Sandboxes, MCP servers, tools. Uniform interface, regardless of what runs underneath.</div>
+          <div class="arch-api"><code>execute(name, input) &rarr; string</code> <code>provision({resources})</code></div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-blue">Performance after the rebuild: p50 time to first token down 60 percent. p95 down over 90 percent. The recovery cliff disappeared.</div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<div class="article-container">
+  <p class="prose">Anthropic uses an OS analogy to explain the design goal. They reach back to the 1970s. The read() and write() system calls in Unix worked across dozens of generations of hardware because the abstractions sat at the right level: above the disk controller, below the application. Programs from 1975 still run on hardware from 2026 because the file system call interface stayed stable. Anthropic wants the same property for agents. The brain, hands, and session interfaces are designed to outlast specific Claude versions and specific harness implementations. They will probably outlast Claude Code itself.</p>
+
+  <p class="prose">The rebuild shipped with concrete performance numbers. Anthropic disclosed time to first token improvements: p50 dropped 60 percent. p95 dropped over 90 percent. The number that matters is p95: the long tail of agent runs where things go wrong is where users feel pain. By moving session state to durable storage and making the brain stateless, Anthropic removed the recovery cliff. A crashed agent now restarts in milliseconds. The old architecture would have lost the run.</p>
+
+  <p class="prose">That is the engineering story. Here is why it matters for Outcomes.</p>
+
+  <p class="prose">In the old coupled architecture, the eval loop was your problem because there was no shared substrate to attach a second evaluator to. Your agent's brain held the session in memory. Your tool calls happened inside the same process. To grade the output, you wrote a second prompt in the same code path, ran it through the same Claude API, and routed the result back to the same loop. The grader could not be a separate Claude instance with its own context window because there was no abstraction that would let two brains read the same session without colliding.</p>
+
+  <p class="prose">The April 8 decoupling changes that. The session is durable and queryable. Two brains can read the same session. One brain can be the worker. A second, isolated brain can be the grader.</p>
+</div>
+
+<!-- ═══ DIAGRAM 7 ═══ -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">07 / 11</div>
+    <div class="card-title">Outcomes is a second brain on the same bus</div>
+    <div class="card-sub">The grader does not share memory with the worker. It reads the same session, scores the output, and writes its decision back as an event.</div>
+    <div class="card-body">
+      <div class="twin-brain-row">
+        <div class="arch-node is-brain">
+          <div class="arch-header"><div class="arch-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="arch-title">Worker brain</div></div>
+          <div class="arch-sub">Does the task. Writes output to the session.</div>
+          <div class="arch-api"><code>emitEvent(output)</code></div>
+        </div>
+        <div class="arch-node is-grader">
+          <div class="isolated-tag">Isolated Context</div>
+          <div class="arch-header"><div class="arch-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#788c5d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="arch-title">Grader brain</div></div>
+          <div class="arch-sub">Reads rubric and output from session. Returns a decision event.</div>
+          <div class="arch-api"><code>getEvents()</code> <code>emitEvent(decision)</code></div>
+        </div>
+      </div>
+      <div class="arch-connector" style="margin-top:16px;margin-bottom:14px"><span class="arch-connector-label">both attach to the same session</span></div>
+      <div class="session-bar">
+        <div class="session-bar-content">
+          <div><div class="session-bar-meta">Session</div><div class="session-bar-name">sesn_01HX...</div></div>
+          <div class="session-bar-events">user.define_outcome &rarr; tool.call &rarr; tool.result &rarr; output.complete<br>&rarr; outcome_evaluation_start &rarr; outcome_evaluation_end &rarr; satisfied</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-orange">The grader cannot see the worker's reasoning. Only the events the worker chose to write. That isolation is what makes the score honest.</div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<div class="article-container">
+  <p class="prose">That is what Outcomes is, mechanically. A second brain wired to your session log, gated by a rubric you define. The grader reads the worker's output from the session, scores it, and writes a new event back. The worker brain, which has been waiting, reads the new event and decides whether to continue. The whole loop runs server side because the substrate now supports it.</p>
+
+  <p class="prose">So the May 6 announcement was not a roadmap. The roadmap had already shipped on April 8. May 6 was the tax: four features that all depend on the same brain, hands, and session decoupling, each capturing a different layer of what used to be your code.</p>
+
+  <!-- ═══ SECTION 4 ═══ -->
+  <h2 class="section-heading">The Verification Layer Is the First SKU. Dreams and Multi-Agent Are the Same Move.</h2>
+
+  <p class="prose">The harness is being unbundled in real time. The four features Anthropic shipped on May 6 are not four features. They are four layers of what used to be your eval and orchestration code, each extracted into a separate product on the same brain, hands, and session substrate.</p>
+
+  <p class="prose"><strong>Verification went first.</strong> Outcomes turns rubric grading into a managed loop. You write the markdown. Anthropic runs the grader brain. The benchmark numbers (+10pp on hard tasks, +8.4 percent on docx, +10.1 percent on pptx) and customer wins (Wisedocs 50 percent faster, Spiral parallel drafts) anchor it. Public beta as of May 6, no separate access request.</p>
+
+  <p class="prose"><strong>Memory curation went second</strong>, as research preview. Dreams is a scheduled brain that reads the existing memory store and up to 100 past sessions, then writes a new reorganized memory store. The input is never modified. You can review the dream output before it lands, or let it apply automatically. Dreams runs claude-opus-4-7 or claude-sonnet-4-6 and ships behind a separate beta header dreaming-2026-04-21. Harvey reports a sixfold improvement in completion rate on legal drafting once their agents started carrying institutional memory across sessions instead of relearning filetype workarounds every run. The architectural significance: memory consolidation becomes async and reviewable, not written on the fly. Enterprises can audit memory updates before agents adopt them.</p>
+
+  <p class="prose"><strong>Orchestration went third.</strong> Multi-Agent lets a lead brain delegate to up to twenty parallel specialist brains, each with its own context window. The lead receives the original task, splits it, dispatches, and aggregates. The Claude Console shows what each sub-agent did, so the work stays inspectable. Netflix uses this to analyze logs across hundreds of build sources in parallel, surfacing only patterns that recur. Spiral combines it with Outcomes: lead agent receives a writing brief, sub-agents generate parallel drafts, Outcomes scores each against editorial criteria, the lead ships the best one. Two harness layers composed cleanly because they share a substrate.</p>
+
+  <p class="prose"><strong>Lifecycle hooks went fourth.</strong> Webhooks let external systems subscribe to session events. You define an outcome, agent runs, your endpoint receives notification when work completes. No polling. The architectural read: the session log is now an external event stream you can plug into. The harness is no longer a black box from which you fish results.</p>
+</div>
+
+<!-- ═══ DIAGRAM 8 ═══ -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">08 / 11</div>
+    <div class="card-title">Four harness layers. Four SKUs.</div>
+    <div class="card-sub">What used to live in your code now ships as managed product. Each layer extracted on the same brain, hands, and session substrate.</div>
+    <div class="card-body">
+      <div class="layer-table">
+        <div class="layer-row layer-header"><div class="layer-cell layer-name">Layer</div><div class="layer-cell layer-was">In your code</div><div class="layer-cell layer-is">As a SKU</div><div class="layer-cell layer-status">Status</div></div>
+        <div class="layer-row"><div class="layer-cell layer-name">Verification</div><div class="layer-cell layer-was"><code>while not satisfied:</code></div><div class="layer-cell layer-is is-orange">Outcomes</div><div class="layer-cell layer-status">Public beta</div></div>
+        <div class="layer-row"><div class="layer-cell layer-name">Memory curation</div><div class="layer-cell layer-was">Nightly cron + summarizer</div><div class="layer-cell layer-is is-blue">Dreams</div><div class="layer-cell layer-status">Research preview</div></div>
+        <div class="layer-row"><div class="layer-cell layer-name">Orchestration</div><div class="layer-cell layer-was">asyncio + dispatch table</div><div class="layer-cell layer-is is-green">Multi-Agent</div><div class="layer-cell layer-status">Public beta</div></div>
+        <div class="layer-row"><div class="layer-cell layer-name">Lifecycle hooks</div><div class="layer-cell layer-was">Polling + handlers</div><div class="layer-cell layer-is is-amber">Webhooks</div><div class="layer-cell layer-status">Public beta</div></div>
+      </div>
+    </div>
+    <div class="callout callout-blue">All four ride on the same April 8 substrate. The decoupling shipped first. The layers shipped second.</div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<div class="article-container">
+  <p class="prose">Each of these used to be your code. The eval loop was your while not satisfied block. The memory consolidation was your nightly cron job summarizing yesterday's sessions. The orchestrator was your coordinator script with subprocess calls. The webhooks were your ad hoc polling. None of it was glamorous. All of it was structural. All of it broke every quarter when something upstream changed.</p>
+
+  <p class="prose">The May 6 release names what is happening: each harness layer is becoming a separately purchased product. You compose them. You do not build them.</p>
+
+  <p class="prose">This is why Outcomes specifically went first. Of the four, verification is the cleanest layer to extract. Memory has policy and audit complications. Orchestration has cost control complications. Webhooks are infrastructure, not intelligence. Verification is the layer where the value of the substrate (a separate Claude that does not see your worker's reasoning) is most visible and the failure modes are most quantifiable. Anthropic shipped the layer with the clearest standalone value first, then bundled the rest.</p>
+</div>
+
+<!-- ═══ DIAGRAM 9 ═══ -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">09 / 11</div>
+    <div class="card-title">Harness as code, then as product line</div>
+    <div class="card-sub">Yesterday you owned the loop, the pipeline, the dispatcher, and the hooks. Today you compose them.</div>
+    <div class="card-body">
+      <div class="compare-grid">
+        <div class="compare-card is-old">
+          <div class="compare-header"><span class="compare-tag is-old">Yesterday</span><span class="compare-title">Harness as code</span></div>
+          <ul class="harness-list">
+            <li><span class="harness-marker is-code"></span>your eval loop</li>
+            <li><span class="harness-marker is-code"></span>your memory pipeline</li>
+            <li><span class="harness-marker is-code"></span>your orchestrator</li>
+            <li><span class="harness-marker is-code"></span>your webhook handlers</li>
+          </ul>
+          <div class="compare-footer">All your code. All your maintenance. Every quarter, something upstream changes and you rewrite a piece.</div>
+        </div>
+        <div class="vs-divider">&rarr;</div>
+        <div class="compare-card is-new">
+          <div class="compare-header"><span class="compare-tag is-new">Today</span><span class="compare-title">Harness as products</span></div>
+          <ul class="harness-list">
+            <li><span class="harness-marker is-orange"></span>Outcomes</li>
+            <li><span class="harness-marker is-blue"></span>Dreams</li>
+            <li><span class="harness-marker is-green"></span>Multi-Agent</li>
+            <li><span class="harness-marker is-amber"></span>Webhooks</li>
+          </ul>
+          <div class="compare-footer">Each layer is a separately purchased SKU on Anthropic's substrate. You compose them. You do not build them.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-orange">The agent template is becoming the unit of distribution. The harness is becoming infrastructure underneath it.</div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<div class="article-container">
+  <p class="prose">The cumulative effect is not new pricing. It is a new product shape. Look at where Anthropic spent engineering effort over the last twelve months. Claude Code, the Claude Agent SDK, Managed Agents launch in April, the April 8 brain, hands, and session rebuild, May 6 layer extractions, ten finance agent templates that ship as Cowork plugins, Code plugins, and Managed Agents cookbooks all at once. The trajectory is consistent: the agent template is becoming the unit of distribution, and the harness is becoming infrastructure underneath. Two years ago, the thing you bought from Anthropic was a model. One year ago, the thing you bought was a model and an SDK. Today, the thing you buy is a stack of harness layers you compose around a model. Tomorrow, agent templates may matter more than which Claude version is underneath.</p>
+
+  <p class="prose">That is what "Outcomes is a SKU" actually means. Not that one feature got a price tag. That the layer beneath every production agent shifted from your codebase to Anthropic's product catalog.</p>
+
+  <!-- ═══ SECTION 5 ═══ -->
+  <h2 class="section-heading">What Builders Should Stop Writing</h2>
+
+  <p class="prose">The right move is not to adopt Managed Agents. The right move is to delete code.</p>
+
+  <p class="prose">Three concrete subtractions, in order of leverage.</p>
+
+  <p class="prose"><strong>Stop writing eval loops. Start writing rubrics.</strong> Outcomes does the loop, the grader, the iteration cap, the structured feedback, the retry logic, the observability. Your job becomes specifying success criteria in markdown that another Claude can grade against. The skill that wins is precise rubric writing: explicit acceptance conditions, clear rejection conditions, edge cases articulated. This is closer to product spec writing than to engineering. Most teams will discover their existing rubrics are vague enough that the grader will need three iterations to converge. That is your signal to write better rubrics, not to abandon the feature. Lowest commitment: try Outcomes on a single agent task this week. The cost is the runtime hour at $0.08 plus standard token rates.</p>
+
+  <p class="prose"><strong>Stop building memory consolidation pipelines. Start scheduling Dreams.</strong> Most teams running agents that operate over hours or days have a homegrown memory layer that became a liability six months in. The notes pile up. Yesterday's debugging insights contradict last week's architectural decisions. The agent ends up either drowning in stale memory or losing context every restart. Dreams is the scheduled cleanup that human brains do during REM sleep, made explicit. Read past sessions, extract patterns, write a new reorganized store, leave the input untouched. The audit trail is real: enterprises can review what changed before agents adopt the new memory. Dreams is research preview only, so you have to request access. The trade is patience: takes minutes to tens of minutes per dream cycle, runs claude-opus-4-7 or claude-sonnet-4-6 at standard token rates.</p>
+
+  <p class="prose"><strong>Stop running orchestrators. Start defining sub-agent specs.</strong> If your agent already coordinates parallel work, you have an orchestrator. It probably uses asyncio, has a custom dispatch table, and routes around model rate limits with homemade backoff. Multi-Agent replaces the orchestration code. You define what each sub-agent does, how they connect, what the lead aggregates. Up to twenty parallel specialists per session. The Console gives you the per-agent inspection that took you three sprints to build internally. The constraint: this is the most opinionated layer. You inherit Anthropic's view of what multi-agent coordination should look like. If your existing patterns disagree, this is harder to migrate.</p>
+</div>
+
+<!-- ═══ DIAGRAM 10 ═══ -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">10 / 11</div>
+    <div class="card-title">Where to start. The adoption ladder.</div>
+    <div class="card-sub">Ranked by leverage divided by commitment. Outcomes pays for itself first. Multi-Agent pays last.</div>
+    <div class="card-body">
+      <div class="ladder">
+        <div class="ladder-step is-orange">
+          <div class="ladder-rank">01</div>
+          <div class="ladder-content">
+            <div class="ladder-title">Outcomes first</div>
+            <div class="ladder-sub">Highest leverage. Lowest commitment.</div>
+            <div class="ladder-meta">
+              <span><strong>Effort</strong>One markdown rubric plus the API call.</span>
+              <span><strong>Rollback</strong>An afternoon.</span>
+              <span><strong>Cost</strong>$0.08 per runtime hour plus tokens.</span>
+            </div>
+          </div>
+        </div>
+        <div class="ladder-step is-blue">
+          <div class="ladder-rank">02</div>
+          <div class="ladder-content">
+            <div class="ladder-title">Dreams when memory rot is real</div>
+            <div class="ladder-sub">Do not adopt prophylactically. Wait for evidence.</div>
+            <div class="ladder-meta">
+              <span><strong>Trigger</strong>Your memory store is a known liability.</span>
+              <span><strong>Process</strong>Schedule a dream, audit the diff, then let it land.</span>
+              <span><strong>Note</strong>Research preview, separate access required.</span>
+            </div>
+          </div>
+        </div>
+        <div class="ladder-step is-green">
+          <div class="ladder-rank">03</div>
+          <div class="ladder-content">
+            <div class="ladder-title">Multi-Agent on greenfield only</div>
+            <div class="ladder-sub">Migrating an existing orchestrator is a rewrite.</div>
+            <div class="ladder-meta">
+              <span><strong>When</strong>Building a new agent system.</span>
+              <span><strong>Constraint</strong>Twenty parallel specialist ceiling.</span>
+              <span><strong>Skip if</strong>You already have a working orchestrator.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-green">The maintenance burden you save pays for the constraints you accept. Pilot one workflow this week.</div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<div class="article-container">
+  <p class="prose">The honest tradeoff, named.</p>
+
+  <p class="prose"><strong>The hard constraint is model.</strong> Managed Agents only runs Claude. There is no path to running GPT or Gemini or open weights through this harness. If your stack is multi model today or you are likely to need that flexibility in 18 months, you are picking a different bet. Frameworks like CrewAI and LangGraph let you swap providers and survive a multi cloud strategy. Outcomes does not. That is the price of letting Anthropic carry the maintenance.</p>
+
+  <p class="prose"><strong>The soft constraint is data.</strong> Sessions, memory stores, dreams, and grader contexts all live on Anthropic's infrastructure. For some workloads (regulated finance, defense, healthcare) this is a deal breaker. For others, the SOC 2 and ISO posture and the audit log in the Claude Console are good enough. Worth verifying with your compliance team before adopting at scale.</p>
+
+  <p class="prose"><strong>The soft constraint nobody flags is API surface.</strong> The interfaces (define_outcome, getEvents, wake, provision) are stable per Anthropic's design intent (the OS analogy from the engineering post). But nothing is forever. If Anthropic redraws the harness boundary in two years, your migration cost is real. Manage exposure by keeping your rubrics, agent templates, and tool definitions in your own repo. Treat Anthropic's harness as the runtime, not as the source of truth.</p>
+</div>
+
+<!-- ═══ DIAGRAM 11 ═══ -->
+<div class="diagram-container">
+  <div class="card">
+    <div class="card-number">11 / 11</div>
+    <div class="card-title">What you keep. What Anthropic owns.</div>
+    <div class="card-sub">Manage exposure by keeping the things that encode your product. Let Anthropic carry the runtime.</div>
+    <div class="card-body">
+      <div class="ownership-grid">
+        <div class="ownership-card is-yours">
+          <div class="ownership-header"><div class="ownership-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#788c5d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="ownership-title">You keep</div></div>
+          <ul class="ownership-list"><li>Rubrics</li><li>Agent templates</li><li>Tool definitions</li><li>Prompts</li><li>Business logic</li></ul>
+          <div class="ownership-footer">Everything that encodes <strong>what your product does.</strong> This is your moat. Keep it in your repo.</div>
+        </div>
+        <div class="ownership-card is-anthropic">
+          <div class="ownership-header"><div class="ownership-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="ownership-title">Anthropic runs</div></div>
+          <ul class="ownership-list"><li>Eval loop and grader</li><li>Memory consolidation</li><li>Multi-agent orchestrator</li><li>Session log</li><li>Sandbox execution</li><li>Webhook delivery</li><li>Observability</li></ul>
+          <div class="ownership-footer">Everything that encodes <strong>how the harness runs.</strong> This is the runtime. The eval loop never was your moat.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-blue">The interfaces are stable per Anthropic's design intent. But nothing is forever. Treat the harness as runtime, not source of truth.</div>
+    <div class="attribution">Created by Han HELOIR YAN</div>
+  </div>
+</div>
+
+<div class="article-container">
+  <p class="prose"><strong>Adoption order, ranked by leverage divided by commitment:</strong></p>
+
+  <p class="prose"><strong>Outcomes first.</strong> Highest leverage, lowest commitment. One markdown file plus the API call. You can pilot on a single workflow and roll back in an afternoon. The maintenance burden you save pays for the constraints you accept.</p>
+
+  <p class="prose"><strong>Dreams second</strong>, when memory rot is real. Do not adopt prophylactically. Wait until your agent's memory store has become a known liability and you have data on the cost of staleness. Then schedule a dream and audit the diff before letting it land.</p>
+
+  <p class="prose"><strong>Multi-Agent last</strong>, on greenfield workloads. Migrating an existing orchestrator to Multi-Agent is a rewrite. Better to use Multi-Agent for a new agent system where you are not undoing prior architectural decisions. The ceiling of twenty parallel agents is high enough for most uses but plan around it.</p>
+
+  <p class="prose">What you should keep writing in your own code: the rubrics, the agent templates, the tool definitions, the prompts, the business logic. Everything that encodes what your product does, not how the harness runs it. Those are your moat. The eval loop never was.</p>
+
+  <!-- ═══ CREDITS ═══ -->
+  <div class="credits">
+    <h3>Anthropic primary sources</h3>
+    <ul>
+      <li><strong>"New in Claude Managed Agents: dreaming, outcomes, and multiagent orchestration"</strong> at claude.com/blog/new-in-claude-managed-agents (May 6, 2026). The launch announcement.</li>
+      <li><strong>"Scaling Managed Agents: Decoupling the brain from the hands"</strong> at anthropic.com/engineering/managed-agents (April 8, 2026). The architectural rebuild that made everything in this article possible.</li>
+      <li><strong>"Building Effective Agents"</strong> by Erik Schluntz and Barry Zhang at anthropic.com/research/building-effective-agents (December 2024). The original evaluator-optimizer pattern that became Outcomes.</li>
+      <li>Outcomes API documentation: platform.claude.com/docs/en/managed-agents/define-outcomes</li>
+      <li>Dreams API documentation: platform.claude.com/docs/en/managed-agents/dreams</li>
+      <li>Multi-Agent documentation: platform.claude.com/docs/en/managed-agents/multi-agent</li>
+      <li>Anthropic agent cookbook: github.com/anthropics/anthropic-cookbook</li>
+    </ul>
+
+    <h3>Customer case studies referenced</h3>
+    <ul>
+      <li><strong>Harvey</strong> (legal AI): 6x completion rate improvement with Dreams enabled.</li>
+      <li><strong>Wisedocs</strong> (document review): 50 percent faster reviews with Outcomes.</li>
+      <li><strong>Spiral by Every</strong> (writing tool): parallel drafts with Multi-Agent + Outcomes.</li>
+      <li><strong>Netflix</strong> (platform engineering): log analysis with Multi-Agent across hundreds of build sources.</li>
+    </ul>
+
+    <h3>Independent coverage worth reading</h3>
+    <ul>
+      <li>Simon Willison's live blog of the Code with Claude SF keynote at simonwillison.net/2026/May/6/code-w-claude-2026.</li>
+      <li>Blake Crosley's source-disciplined recap at blakecrosley.com/blog/code-with-claude-sf-2026-recap.</li>
+    </ul>
+
+    <h3>Cross-tool context</h3>
+    <ul>
+      <li>Cursor's "Continually improving our agent harness" (April 30, 2026) for the parallel industry adoption of harness vocabulary, with a different ownership model.</li>
+    </ul>
+  </div>
+
+  <!-- ═══ CLOSING ═══ -->
+  <div class="closing-note">
+    If this helped you ship better AI systems, clap 50 times so others find it.<br>If it did not, tell me why in the comments. I read everything.
+  </div>
+
+</div>
+
+<!-- ═══ Scroll-reveal script ═══ -->
+<script>
+(function(){
+  /* Stagger child animation delays within each card */
+  var SEL = '.timeline-event, .loop-step, .compare-card, .spectrum-card, .arch-node, .ladder-step, .ownership-card, .layer-row:not(.layer-header), .state-pill, .terminal-cell, .session-bar, .arch-connector, .iter-divider, .states-row';
+  document.querySelectorAll('.card').forEach(function(card){
+    card.querySelectorAll(SEL).forEach(function(el, i){
+      el.style.transitionDelay = Math.min(i * 0.05, 0.5) + 's';
+    });
+  });
+
+  /* IntersectionObserver reveals cards as they scroll into view */
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.card').forEach(function(c){ c.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.card').forEach(function(c){ io.observe(c); });
+})();
+</script>
+</body>
+</html>
